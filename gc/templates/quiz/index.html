@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Últimos fechamentos</h2>
+    <div class="card-deck">
+    {%if data:%}
+    {%for x in data:%}
+        <!-- Ad 1 -->
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://via.placeholder.com/800x600" class="card-img" alt="Produto 1">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Data: {{x.date}} </h5>
+                        <p class="card-text">Valores Pagos: R$ {{x.value}} </p>
+                        <p class="card-text">Valor do Título: R$ 100,00</p>
+                        <p class="card-text">Status: {{x.status}}</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+    {%endif%}
+    </div>
+
+
+    <div class="text-center mt-4" >
+        <a href="{{url_for('closure.list')}}">
+        
+            <button type="button" class="btn btn-primary">
+                <i class="bi bi-plus"></i> Listar
+            </button>
+        </a>
+        <a href="{{url_for('closure.create')}}">
+        
+            <button type="button" class="btn btn-primary">
+                <i class="bi bi-plus"></i> Novo
+            </button>
+        </a>  
+  </div>
+</div>
+
+
+<div class="container mt-5">
+    <h2>Informacões do sistema</h2>
+     
+    <div class="card table-responsive-md">
+        <div class="container mt-3">
+          
+          <div class="alert alert-info mt-3">
+            <strong>Total de Títulos:</strong> [{{data[2]}}]
+          </div>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Data</th>
+                <th>Quantidade</th>
+                <th>Status</th>
+                <th>Antigo</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+              
+            </tbody>
+          </table>
+          </div>
+          </div>
+          
+        
+    
+    
+        
+       
+       
+    </div>
+
+
+    
+</div>
+
+
+
+
+
+
+
+<!-- Modal para adicionar novo relatório -->
+<div class="modal fade" id="adicionarRelatorioModal" tabindex="-1" aria-labelledby="adicionarRelatorioModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="adicionarRelatorioModalLabel">Adicionar Novo Relatório</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Conteúdo do formulário para adicionar novo relatório -->
+        <p>Aqui você pode adicionar os detalhes do novo relatório.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+{% endblock %}
+

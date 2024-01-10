@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="iso-8859-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title>Simulador de concurso - girafales</title>
+        {% endblock %}
+    </head>
+<body class="">
+
+
+
+<div class="container mt-4">
+
+  <!-- Conteúdo da página aqui -->
+  {% block content %}
+
+        
+  {% endblock %}
+  {% block content2 %}
+  {% endblock %}
+
+</div>
+
+<div class="d-flex justify-content-center mt-3 bg-light align-items-center">
+  
+ <blockquote class="blockquote mb-4 mt-4">
+      <p>Simulador de concurso - Girafales</p>
+      <footer class="blockquote-footer">Desenvolvimento <cite title="Source Title">Continuo</cite></footer>
+    </blockquote>
+
+</div>
+
+      {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+
+<script type="text/javascript"></script>
+<script>
+  
+let currentPage = 1;
+
+var x = 0;
+function loadData(){    
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function(){
+      appendDataToTable(this.responseText)
+
+    //document.getElementById('tabelabody').innerHTML = this.responseText;
+      }
+   
+  xmlhttp.open("GET","/pagamentos/ajax?page="+x, true);
+  x=x+10;
+  xmlhttp.send();
+    
+}
+
+function filtraData(){    
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function(){
+      var codigo = document.getElementById('codigo').value
+      alert(codigo)
+      recallDataToTable(this.responseText)
+
+    //document.getElementById('tabelabody'). = this.responseText;
+      }
+   
+  xmlhttp.open("GET","/pagamentos/ajax?page="+x+"&codigo="+codigo.value, true);
+  x=x+10;
+  xmlhttp.send();
+    
+}
+
+// Função para adicionar dados à tabela
+function  recallDataToTable(data) {
+    const tbody = $('#tabelabody');
+      const row = $(data);
+      tbody = row;
+
+    
+}
+
+// Função para adicionar dados à tabela
+function appendDataToTable(data) {
+    const tbody = $('#tabelabody');
+      const row = $(data);
+      tbody.append(row);
+    
+}
+
+// Função para carregar mais dados quando o usuário rolar a página
+$("#carregar").click(function () {
+    
+        loadData();
+    
+});
+
+$("#filtrar").click(function () {
+        
+        filtraData()
+
+      
+    
+});
+
+</script>
+
+</body>
+</html>
+
+
