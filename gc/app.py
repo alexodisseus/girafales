@@ -1,6 +1,8 @@
 import admin
-#import quiz
+import quiz
 import model
+import panel
+
 
 from flask import Flask
 from flask_bootstrap import Bootstrap4
@@ -15,7 +17,8 @@ app.secret_key = b'guerra aos senhores'
 
 
 admin.configure(app)
-#quiz.configure(app)
+quiz.configure(app)
+panel.configure(app)
 db.configure(app)
 
 Bootstrap4(app)

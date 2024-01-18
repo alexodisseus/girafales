@@ -15,6 +15,27 @@
         {% endblock %}
     </head>
 <body class="">
+  <ul>
+    <li >
+      <a href="{{url_for('quiz.index')}}">
+        
+      concursos
+      </a>
+    </li>
+    <li>
+      <a href="{{url_for('quiz.index')}}">
+      bancas
+    </a>
+    </li>
+    <li>
+      <a href="{{url_for('admin.login')}}">
+      login
+    </a>
+    </li>
+
+  </ul>
+
+
 
 
 
@@ -45,75 +66,6 @@
         {% endblock %}
 
 <script type="text/javascript"></script>
-<script>
-  
-let currentPage = 1;
-
-var x = 0;
-function loadData(){    
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function(){
-      appendDataToTable(this.responseText)
-
-    //document.getElementById('tabelabody').innerHTML = this.responseText;
-      }
-   
-  xmlhttp.open("GET","/pagamentos/ajax?page="+x, true);
-  x=x+10;
-  xmlhttp.send();
-    
-}
-
-function filtraData(){    
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function(){
-      var codigo = document.getElementById('codigo').value
-      alert(codigo)
-      recallDataToTable(this.responseText)
-
-    //document.getElementById('tabelabody'). = this.responseText;
-      }
-   
-  xmlhttp.open("GET","/pagamentos/ajax?page="+x+"&codigo="+codigo.value, true);
-  x=x+10;
-  xmlhttp.send();
-    
-}
-
-// Função para adicionar dados à tabela
-function  recallDataToTable(data) {
-    const tbody = $('#tabelabody');
-      const row = $(data);
-      tbody = row;
-
-    
-}
-
-// Função para adicionar dados à tabela
-function appendDataToTable(data) {
-    const tbody = $('#tabelabody');
-      const row = $(data);
-      tbody.append(row);
-    
-}
-
-// Função para carregar mais dados quando o usuário rolar a página
-$("#carregar").click(function () {
-    
-        loadData();
-    
-});
-
-$("#filtrar").click(function () {
-        
-        filtraData()
-
-      
-    
-});
-
-</script>
-
 </body>
 </html>
 
