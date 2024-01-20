@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="iso-8859-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title>Simulador de concurso - girafales</title>
+        {% endblock %}
+    </head>
+<body class="">
+  <ul>
+    <li >
+      <a href="{{url_for('quiz.index')}}">
+        
+      concursos
+      </a>
+    </li>
+    <li>
+      <a href="{{url_for('quiz.index')}}">
+      bancas
+    </a>
+    </li>
+    <li>
+      <a href="{{url_for('admin.login')}}">
+      login
+    </a>
+    </li>
+
+  </ul>
+
+
+
+
+
+<div class="container mt-4">
+
+  <!-- Conteúdo da página aqui -->
+  {% block content %}
+
+        
+  {% endblock %}
+  {% block content2 %}
+  {% endblock %}
+
+</div>
+
+<div class="d-flex justify-content-center mt-3 bg-light align-items-center">
+  
+ <blockquote class="blockquote mb-4 mt-4">
+      <p>Simulador de concurso - Girafales</p>
+      <footer class="blockquote-footer">Desenvolvimento <cite title="Source Title">Continuo</cite></footer>
+    </blockquote>
+
+</div>
+
+      {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+
+<script type="text/javascript"></script>
+
+
+</body>
+</html>
+
+

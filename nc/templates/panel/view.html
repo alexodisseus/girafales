@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Questionário</h2>
+        <form id="quizForm">
+            {% for question in questions %}
+            <div class="card mt-3">
+                <div class="card-body">
+                    <p>{{ question.statement }}</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answer{{ loop.index }}" id="true{{ loop.index }}" value="true" required>
+                        <label class="form-check-label" for="true{{ loop.index }}">Verdadeiro</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answer{{ loop.index }}" id="false{{ loop.index }}" value="false" required>
+                        <label class="form-check-label" for="false{{ loop.index }}">Falso</label>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm mt-2 edit-btn" data-question="{{ question.statement }}">Editar</button>
+                    <button type="button" class="btn btn-danger btn-sm mt-2 delete-btn">Excluir</button>
+                </div>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary mt-3">Enviar Respostas</button>
+        </form>
+    </div>
+
+    <!-- Adiciona o script JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Adiciona a lógica JavaScript para editar e excluir perguntas
+        $(document).ready(function () {
+            // Botão de editar
+            $('.edit-btn').on('click', function () {
+                // Obtém o texto da pergunta
+                var questionText = $(this).data('question');
+                
+                // Substitui o texto atual pelo texto da pergunta
+                var answer = prompt("Editar pergunta:", questionText);
+
+                // Atualiza o texto da pergunta na interface
+                if (answer !== null) {
+                    $(this).siblings('p').text(answer);
+                }
+            });
+
+            // Botão de excluir
+            $('.delete-btn').on('click', function () {
+                // Confirmação antes de excluir
+                var confirmDelete = confirm("Tem certeza que deseja excluir esta pergunta?");
+                if (confirmDelete) {
+                    // Remove o card da pergunta
+                    $(this).closest('.card').remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+{% endblock %}
+
+
+
+
+
