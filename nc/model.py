@@ -150,6 +150,22 @@ def read_user(email , password):
 
 
 
+def get_question_realize(user_id , exam_id):
+	with Session(engine) as session:
+
+		query = select(Question)
+		#continue
+		data = session.exec(query).first()
+
+
+		question = session.get(Question, data.id)
+
+		return question,question.alternatives
+
+
+
+
+
 def create_questions_from_dict(questions_dict: dict) -> List[Question]:
     questions = []
     for statement, answer in questions_dict.items():
@@ -219,6 +235,21 @@ def get_questions_view(id):
 
 		return data
 
+def get_questions_view2(id):
+	with Session(engine) as session:
+		query = select(Question).join(Question_exam)
+		query = query.where( Question_exam.exam_id == id )
+
+		data = session.exec(query).all()
+
+		questions = []
+		for x in data:
+			question = session.get(Question, x.id)
+			questions.append(question)
+			questions.append(question.alternatives)
+
+		
+		return questions
 
 
 

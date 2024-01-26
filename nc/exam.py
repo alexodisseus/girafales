@@ -38,26 +38,26 @@ def view(id):
 	#questions = model.get_questions_by_id_exam(id)
 
 	questions = model.get_questions_view(id)
+	#para exibir as alternativas trocar para
+	#questions = model.get_questions_view2(id)
 	
 	return render_template('exam/view.html' , exam=exam , questions = questions)
 	
 @exam.route('/realizar_exame/<id>', methods = ['GET','POST'])
 def releaze(id):
-	"""
+
 	if 'username' not in session:
 		return redirect(url_for('admin.login'))
 
-	"""
+	
 
-	#data = model.read_tasks(session['userid'])
 	
 	exam = model.get_exam_by_id(id)
 
-	questions = model.get_questions_view(id)
+	user = session['userid']
+	questao = model.get_question_realize(user, exam.id)
 
-
-
-	return render_template('exam/releaze.html' , exam=exam , questions = questions)
+	return render_template('exam/releaze.html' , exam=exam , questao=questao)
 
 @exam.route('/editar/<id>', methods=['GET'])
 def edit(id):

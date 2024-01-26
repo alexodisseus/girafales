@@ -11,7 +11,6 @@
 {% block content %}
 
 
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -72,6 +71,7 @@
         <div class="category">
             {%if questions: %}
                 {%for x in questions:%}
+                
                     {%if x.tag == 'portugues':%}
                         <div class="card">
                             <div class="card-body">
