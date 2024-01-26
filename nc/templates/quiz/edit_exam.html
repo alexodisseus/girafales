@@ -62,28 +62,16 @@
               <input class="form-check-input" type="checkbox" id="materia-conhecimentos-gerais" value="conhecimentos-gerais">
               <label class="form-check-label" for="materia-conhecimentos-gerais">Conhecimentos Gerais</label>
             </div>
-          <i class="fas fa-plus search-btn"></i>
+            <div class="form-check form-check-inline">
+            
+              <button class="fas fa-plus search-btn"></button>
+            </div>
           </div>
         </div>
-      
+        
       <div id="sortable2" class="sortable-list">
         
-        <div class="card">
-          <div class="card-body">
-            Card 3 - Adicionar ao teste
-          </div>
-          <div class="card-footer text-end">
-            <i class="fas fa-plus action-btn"></i>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            Card 4 - Adicionar ao teste
-          </div>
-          <div class="card-footer text-end">
-            <i class="fas fa-plus action-btn"></i>
-          </div>
-        </div>
+        
       </div>
     </div>
     <div class="col-md-6">
@@ -105,6 +93,22 @@
             <i id="filtrar" class="fas fa-plus action-btn"></i>
           </div>
         </div>
+        <div class="card">
+          <div class="card-body">
+            Card 3 - Adicionar ao teste
+          </div>
+          <div class="card-footer text-end">
+            <i class="fas fa-plus action-btn"></i>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            Card 4 - Adicionar ao teste
+          </div>
+          <div class="card-footer text-end">
+            <i class="fas fa-plus action-btn"></i>
+          </div>
+        </div>
       </div>
       
     </div>
@@ -113,15 +117,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 <script>
-    let currentPage = 1;
 
 var x = 0;
 function loadData(){    
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.onreadystatechange=function(){
-      appendDataToTable(this.responseText)
-
-    //document.getElementById('tabelabody').innerHTML = this.responseText;
+    
+    document.getElementById('sortable2').innerHTML = this.responseText;
       }
    
   xmlhttp.open("GET","/quiz/ajax?page="+x, true);
@@ -129,55 +131,6 @@ function loadData(){
   xmlhttp.send();
     
 }
-
-
-var codigo = 12
-//alert(codigo)
-function filtraData(){    
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function(){
-      
-      //var codigo = document.getElementById('codigo').value
-      var codigo = 12
-      //alert(codigo)
-      recallDataToTable(this.responseText)
-
-    //document.getElementById('tabelabody'). = this.responseText;
-      }
-   
-  //xmlhttp.open("GET","/quiz/ajax?page="+x+"&codigo="+codigo.value, true);
-  xmlhttp.open("GET","/quiz/ajax?page="+x+"&codigo="+codigo, true);
-  x=x+10;
-  xmlhttp.send();
-    
-}
-
-// Função para adicionar dados à tabela
-function  recallDataToTable(data) {
-    alert(data);
-    const div = $('#sortable1');
-    alert(div);
-      
-      const row = $(data);
-    alert(row);
-      div = row;
-    alert(div);
-
-    
-}
-
-// Função para adicionar dados à tabela
-function appendDataToTable(data) {
-  const targetList = document.getElementById('sortable1');
-      targetList.appendChild(data);
-    
-
-    //const tbody = $('#tabelabody');
-     // const row = $(data);
-      //tbody.append(row);
-    
-}
-
 
 
   const sortable1 = new Sortable(document.getElementById('sortable1'), {
@@ -207,9 +160,9 @@ function appendDataToTable(data) {
 
   document.querySelectorAll('.search-btn').forEach(button => {
     button.addEventListener('click', () => {
-      //alert("10");
-      filtraData();
+
       const card = button.closest('.card');
+      loadData()
       const parentList = card.closest('.sortable-list');
       const targetList = parentList.id === 'sortable1' ? document.getElementById('sortable2') : document.getElementById('sortable1');
       targetList.appendChild(card);
