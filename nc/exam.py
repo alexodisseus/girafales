@@ -49,15 +49,32 @@ def releaze(id):
 	if 'username' not in session:
 		return redirect(url_for('admin.login'))
 
-	
-
-	
 	exam = model.get_exam_by_id(id)
-
 	user = session['userid']
 	questao = model.get_question_realize(user, exam.id)
 
 	return render_template('exam/releaze.html' , exam=exam , questao=questao)
+
+#arrumar as variaveis, ta bagunçado
+@exam.route('/seguinte/<id>', methods = ['GET','POST'])
+def next(id):
+
+	if 'username' not in session:
+		return redirect(url_for('admin.login'))
+
+	exam = model.get_exam_by_id(id)
+	user = session['userid']
+	question_id = id
+
+	print("exame")
+	print(exam)
+
+	questao = model.get_question_realize_next(user, exam.id , question_id)
+
+
+	return render_template('exam/releaze.html' , exam=exam , questao=questao)
+
+
 
 @exam.route('/editar/<id>', methods=['GET'])
 def edit(id):

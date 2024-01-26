@@ -163,6 +163,18 @@ def get_question_realize(user_id , exam_id):
 		return question,question.alternatives
 
 
+def get_question_realize_next(user_id , question_id):
+	with Session(engine) as session:
+
+		query = select(Question).where(Question.id > question_id)
+		
+		data = session.exec(query).first()
+
+
+		question = session.get(Question, data.id)
+
+		return question,question.alternatives
+
 
 
 
