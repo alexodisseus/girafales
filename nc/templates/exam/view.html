@@ -45,148 +45,37 @@
     
     <!-- Abas de Categorias -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="portugues-tab" data-toggle="tab" href="#portugues" role="tab" aria-controls="portugues" aria-selected="true">Português</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="matematica-tab" data-toggle="tab" href="#matematica" role="tab" aria-controls="matematica" aria-selected="false">Matemática</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="gerais-tab" data-toggle="tab" href="#gerais" role="tab" aria-controls="gerais" aria-selected="false">Conhecimentos Gerais</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="especificos-tab" data-toggle="tab" href="#especificos" role="tab" aria-controls="especificos" aria-selected="false">Conhecimentos Específicos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="texto-tab" data-toggle="tab" href="#texto" role="tab" aria-controls="texto" aria-selected="false">Texto Interpretação</a>
-      </li>
+      {%if tags:%}
+        {%for x in tags:%}
+          <li class="nav-item">
+            
+            <a class="nav-link" id="{{x}}-tab" data-toggle="tab" href="#{{x}}" role="tab" aria-controls="{{x}}" aria-selected="true">{{x}}</a>
+          </li>
+        {%endfor%}
+      {%endif%}
+      
     </ul>
     
     <!-- Conteúdo das Abas -->
 <div class="tab-content" id="myTabContent">
     
 
-    <div class="tab-pane fade show active" id="portugues" role="tabpanel" aria-labelledby="portugues-tab">
-        <!-- Questões de Português -->
-        <div class="category">
-            {%if questions: %}
-                {%for x in questions:%}
-                
-                    {%if x.tag == 'portugues':%}
-                        <div class="card">
-                            <a href="{{ url_for('question.view', question_id=x.id, exam_id=exam.id  ) }}" class="btn btn-primary">Próxima</a>
-                            <div class="card-body">
-                                <h5 class="card-title">Questão {{x.id}}:</h5>
-                                <p class="card-text"> {{x.text}}</p>
-                                
-                            </div>
-                        </div>
-                    {%endif%}
-                {%endfor%}
-            {%else%}
-                <div class="card">
 
-                    <div class="card-body">
-                        <h5 class="card-title">Não existe</h5>
-
-                    </div>
-                </div>
-            {%endif%}
-        </div>
-    </div>
-
-    <div class="tab-pane fade" id="matematica" role="tabpanel" aria-labelledby="matematica-tab">
-        <!-- Questões de Matemática -->
-        <div class="category">
-            {%if questions: %}
-                {%for x in questions:%}
-                    {%if x.tag == 'matematica':%}
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Questão {{x.id}}:</h5>
-                                <p class="card-text"> {{x.text}}</p>
-                                
-                            </div>
-                        </div>
-                    {%endif%}
-                {%endfor%}
-            {%else%}
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Não existe</h5>
-                    </div>
-                </div>
-            {%endif%}
-        </div>
-    </div>
-
-    <div class="tab-pane fade" id="gerais" role="tabpanel" aria-labelledby="gerais-tab">
-        <!-- Questões de Conhecimentos Gerais -->
-        <div class="category">
-            {%if questions: %}
-                {%for x in questions:%}
-                    {%if x.tag == 'conhecimentos_gerais':%}
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Questão {{x.id}}:</h5>
-                                <p class="card-text"> {{x.text}}</p>
-                                
-                            </div>
-                        </div>
-                    {%endif%}
-                {%endfor%}
-            {%else%}
-                <div class="card">
-
-                    <div class="card-body">
-                        <h5 class="card-title">Não existe</h5>
-
-                    </div>
-                </div>  
-            {%endif%}
-        </div>
-    </div>
-
-    <div class="tab-pane fade" id="texto" role="tabpanel" aria-labelledby="testo-tab">
+    {%if tags:%}
+        {%for y in tags:%}
+    <div class="tab-pane fade" id="{{y}}" role="tabpanel" aria-labelledby="{{y}}-tab">
         <!-- Questões de Conhecimentos Específicos -->
         <div class="category">
             {%if questions: %}
                 {%for x in questions:%}
-                {%if x.tag == 'texto':%}
-                    <div class="card">
-
+                {%if x.tag == y:%}
+                    <div class="card">    
                         <div class="card-body">
-
-                            <h5 class="card-title">Texto para interpretação</h5>
-                            <p class="card-text"> {{x.text}}</p>
-                            
-                        </div>
-                    </div>
-                {%endif%}
-            {%endfor%}
-            {%else%}
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Não existe</h5>
-
-                    </div>
-                </div>
-            {%endif%}
-        </div>
-    </div>
-    <div class="tab-pane fade" id="especificos" role="tabpanel" aria-labelledby="especificos-tab">
-        <!-- Questões de Conhecimentos Específicos -->
-        <div class="category">
-            {%if questions: %}
-                {%for x in questions:%}
-                {%if x.tag == 'conhecimentos_especificos':%}
-                    <div class="card">
-
-                        <div class="card-body">
-
                             <h5 class="card-title">Questão {{x.id}}:</h5>
                             <p class="card-text"> {{x.text}}</p>
-                            
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url_for('question.view', question_id=x.id, exam_id=exam.id  ) }}" class="btn btn-primary">Responder</a>
                         </div>
                     </div>
                 {%endif%}
@@ -201,6 +90,8 @@
             {%endif%}
         </div>
     </div>
+    {%endfor%}
+      {%endif%}
 
 
 

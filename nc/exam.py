@@ -33,15 +33,19 @@ def view(id):
 
 	"""
 
-	#data = model.read_tasks(session['userid'])
 	exam = model.get_exam_by_id(id)
-	#questions = model.get_questions_by_id_exam(id)
 
 	questions = model.get_questions_view(id)
-	#para exibir as alternativas trocar para
-	#questions = model.get_questions_view2(id)
+	tags = []
+	for x in questions:
+		if x.tag in tags:
+			pass
+		else:
+			tags.append(x.tag)
 	
-	return render_template('exam/view.html' , exam=exam , questions = questions)
+
+
+	return render_template('exam/view.html' , exam=exam , questions = questions , tags = tags)
 
 
 

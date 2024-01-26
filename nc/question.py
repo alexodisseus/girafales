@@ -27,17 +27,16 @@ def index():
 
 @question.route('/ver/<question_id>/<exam_id>', methods = ['GET','POST'])
 def view(question_id, exam_id):
-	"""
+	
 	if 'username' not in session:
 		return redirect(url_for('admin.login'))
-
-	"""
-
-	#data = model.read_tasks(session['userid'])
 	
-	question = model.get_question_by_id(id)
-	
-	return render_template('question/view.html' , question=question)
+	user = session['userid']
+
+	exam = model.get_exam_by_id(exam_id)
+	questao = model.get_question_realize(user, exam.id , question_id)
+
+	return render_template('question/view.html' , exam=exam , questao=questao)
 	
 
 @question.route('/editar/<id>', methods=['GET'])

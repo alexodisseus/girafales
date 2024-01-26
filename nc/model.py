@@ -150,16 +150,17 @@ def read_user(email , password):
 
 
 
-def get_question_realize(user_id , exam_id):
+def get_question_realize(user_id , exam_id , question_id):
 	with Session(engine) as session:
-
+		"""
 		query = select(Question).join(Question_exam)
 		query = query.where( Question_exam.exam_id == exam_id )
 		#continue
 		data = session.exec(query).first()
+		"""
 
 
-		question = session.get(Question, data.id)
+		question = session.get(Question, question_id)
 
 		return question,question.alternatives
 
@@ -431,9 +432,9 @@ def get_search_question(search):
 def get_exam_by_id(id):
 	with Session(engine) as session:
 		#question =session.get( Question_exam)  
-		exam = session.get(Exam, id)
+		data = session.get(Exam, id)
 		
-		return exam
+		return data
 
 
 def get_all_questions_null(id):
