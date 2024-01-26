@@ -47,14 +47,9 @@ class User(SQLModel, table=True):
 	"""docstring for User  -  tabela para cotistas"""
 	id: Optional[int] = Field(default=None, primary_key=True)
 	name:str
-	cpf:str
 	email:str
-	birth:str
-	telephone:str
-	cell:str
-	status:str
-	code:str
-	income_tax:str
+	password:str
+	#exams:List['Exam']=Relationship()
 	
 
 
@@ -129,9 +124,29 @@ class Alternative(SQLModel, table=True):
     question_id: int = Field(foreign_key='question.id')
     
 
+
+class Attempt(SQLModel, table=True):
+
+	id: Optional[int] = Field(default=None, primary_key=True)
+	user_id: int = Field(foreign_key='user.id')
+	exam_id: int = Field(foreign_key='exam.id')
+	question_id: int = Field(foreign_key='question.id')
+	answer:str
+	number: str
+	#exams:List['Exam']=Relationship()
+
+
+
 engine = create_engine('sqlite:///db.db')
 
 SQLModel.metadata.create_all(engine)
+
+def read_user(email , password):
+	with Session(engine) as session:
+		query = select(User).where(User.email == email , User.password == password )
+		data = session.exec(query).first()
+
+		return data
 
 
 

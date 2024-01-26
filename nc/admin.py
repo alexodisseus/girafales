@@ -27,22 +27,20 @@ def index():
 @admin.route('/login', methods = ['GET','POST'])
 def login():
 	if request.method == 'POST':
-	    return redirect(url_for('panel.index'))
-	    
-	    """
-		name = request.form['name']
+
+		email = request.form['emai']
 		password = request.form['password']
-		data = model.read_user(name,password)
+		data = model.read_user(email,password)
 
 		if data:
 
 			session['username'] = data.name
 			session['userid'] = data.id
-		"""
-		
+			return redirect(url_for('contest.index'))
 
 
 	return render_template('login.html' )
+
 
 def configure(app):
 	app.register_blueprint(admin)
