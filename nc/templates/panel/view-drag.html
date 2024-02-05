@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+      <link rel="stylesheet" href="https://unpkg.com/interactjs@1.10.11/dist/interact.min.css">
+  <script src="https://unpkg.com/interactjs@1.10.11/dist/interact.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <style>
+    .draggable-card {
+      margin-bottom: 10px;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="draggable-card" id="card1">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Cartão 1</h5>
+        <p class="card-text">Texto do Cartão 1</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  <br>
+
+  <div class="draggable-card" id="card2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Cartão 2</h5>
+        <p class="card-text">Texto do Cartão 2</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  interact('.draggable-card')
+    .draggable({
+      inertia: true,
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: 'parent',
+          endOnly: true,
+        }),
+      ],
+      autoScroll: true,
+      listeners: {
+        move(event) {
+          const { target } = event;
+          const rect = interact.getElementRect(target);
+
+          target.style.transform = `translate(${event.dx}px, ${event.dy}px)`;
+        },
+      },
+    })
+    .dropzone({
+      accept: '.draggable-card',
+      ondropactivate(event) {
+        event.target.classList.add('drop-active');
+      },
+      ondropdeactivate(event) {
+        event.target.classList.remove('drop-active');
+      },
+      ondragenter(event) {
+        const draggedText = $(event.relatedTarget).find('.card-text').text();
+        const targetText = $(event.target).find('.card-text').text();
+        $(event.target).find('.card-text').text(targetText + ' ' + draggedText);
+        $(event.relatedTarget).remove();
+      },
+    });
+</script>
+</body>
+</html>
+
+
+{% endblock %}
+
+
+
+
+

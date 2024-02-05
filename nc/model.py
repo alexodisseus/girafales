@@ -9,6 +9,7 @@ def configure(app):
 
 
 
+
 class Person(SQLModel, table=True):
 	"""docstring for Person  -  tabela para usuarios do sistema"""
 	id: Optional[int] = Field(default=None, primary_key=True)
