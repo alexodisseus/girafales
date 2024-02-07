@@ -19,9 +19,10 @@ def index():
 
 	#data = model.read_tasks(session['userid'])
 	
-	return render_template('index.html' )
-	#return render_template('login.html' )
-
+	asd = model.get_all_questions()
+	
+	return render_template('quiz/index.html' , data = asd )
+	
 
 
 """

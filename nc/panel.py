@@ -46,11 +46,10 @@ def generate_quiz():
 @panel.route('/quiz_create', methods=['POST'])
 def quiz_create():
     
-    questions ="asd"
     todos_os_parametros = request.form.to_dict()
     created_questions = model.create_questions_from_dict(todos_os_parametros)
-    asd = model.get_all_questions()
-    #return redirect(url_for('quiz.index'))
+    
+    return redirect(url_for('quiz.index'))
     return render_template('quiz/view.html', questions=asd)
 
 

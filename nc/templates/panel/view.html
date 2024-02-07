@@ -33,8 +33,10 @@
                         <input class="form-check-input" type="radio" name="{{x}}" id="cabecalho{{ loop.index }}" value="cabecalho" checked>
                         <label class="form-check-label" for="cabecalho{{ loop.index }}">Cabeçalho</label>
                     </div>
+                    <!--
                     <button type="button" class="btn btn-secondary btn-sm mt-2 edit-btn" data-question="{{ x }}">Editar</button>
                     <button type="button" class="btn btn-danger btn-sm mt-2 delete-btn">Excluir</button>
+                    -->
                 </div>
             </div>
             {% endfor %}
@@ -51,12 +53,17 @@
                         <input class="form-check-input" type="radio" name="{{ question }}" id="cabecalho{{ loop.index }}" value="cabecalho" >
                         <label class="form-check-label" for="cabecalho{{ loop.index }}">Cabeçalho</label>
                     </div>
+                    <!--
+
                     <button type="button" class="btn btn-secondary btn-sm mt-2 edit-btn" data-question="{{ question }}">Editar</button>
                     <button type="button" class="btn btn-danger btn-sm mt-2 delete-btn">Excluir</button>
+                    -->
+                    
                 </div>
+
             </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary mt-3">Enviar Respostas</button>
+            <button type="submit" class="btn btn-primary mt-3">Gravar Perguntas</button>
         </form>
     </div>
 
@@ -69,12 +76,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    <script>
-        // Adiciona a lógica JavaScript para editar e excluir perguntas
+    <script>        
         
         
-        
-        
+        /*
+        codigo para editar perguntas direto, não rolou
         $(document).ready(function () {
             // Botão de editar
             $('.edit-btn').on('click', function () {
@@ -87,6 +93,7 @@
                 // Atualiza o texto da pergunta na interface
                 if (answer !== null) {
                     $(this).siblings('p').text(answer);
+                    $(this).attr("name", answer);
                 }
             });
 
@@ -100,6 +107,7 @@
                 }
             });
         });
+        */
     </script>
 </body>
 </html>
