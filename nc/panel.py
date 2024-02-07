@@ -12,6 +12,8 @@ from flask import Blueprint, render_template, current_app , request , session, r
 panel = Blueprint('panel' , __name__ , url_prefix='/painel')
 
 
+
+
 #usado para administrar os usuarios do sistema
 @panel.route('/', methods = ['GET','POST'])
 def index():
@@ -28,14 +30,10 @@ def index():
 
 
 
-
-
 @panel.route('/generate_quiz', methods=['POST'])
 def generate_quiz():
     
-
     text = request.form['text']
-
     
     header, numbered_questions = extract_header_and_questions(text)
     headers = []
@@ -45,63 +43,35 @@ def generate_quiz():
 
 
 
-
 @panel.route('/quiz_create', methods=['POST'])
 def quiz_create():
     
     questions ="asd"
     todos_os_parametros = request.form.to_dict()
-    #ver como pegar o id do anterior e os parametros do outro
-
-    return render_template('quiz/view.html', questions=todos_os_parametros)
-
-@panel.route('/steam', methods=['GET'])
-def steam():
-    
-    questions ="asd"
-    
-
-    return render_template('panel/steam.html')
-
-
-
+    created_questions = model.create_questions_from_dict(todos_os_parametros)
+    asd = model.get_all_questions()
+    #return redirect(url_for('quiz.index'))
+    return render_template('quiz/view.html', questions=asd)
 
 
 
 def extract_header_and_questions(text):
-    """
-    # Tokenização em frases
     sentences = sent_tokenize(text)
 
-    # Cabeçalho é a primeira frase
     header = sentences[0]
 
-    # Filtrar frases que parecem ser questões numeradas
-    question_pattern = re.compile(r'^\d+\s')
-    numbered_questions = [sentence for sentence in sentences[1:] if question_pattern.match(sentence)]
-    """
-    sentences = sent_tokenize(text)
-
-    # Cabeçalho é a primeira frase
-    header = sentences[0]
-
-    # Filtrar frases que parecem ser questões numeradas
     question_pattern = re.compile(r'^\d+\s')
     numbered_questions = []
     current_question = ""
 
     for sentence in sentences[1:]:
         if question_pattern.match(sentence):
-            # Se encontrou uma nova questão numerada, adiciona a anterior à lista
             if current_question:
                 numbered_questions.append(current_question.strip())
-            # Inicia uma nova questão
             current_question = sentence
         else:
-            # Continua a construção da questão atual
             current_question += " " + sentence
 
-    # Adiciona a última questão à lista
     if current_question:
         numbered_questions.append(current_question.strip())
 
@@ -109,10 +79,38 @@ def extract_header_and_questions(text):
 
 
 
-    return header, numbered_questions
-
-
-
-
 def configure(app):
 	app.register_blueprint(panel)
+
+
+
+
+"""
+# Exemplo de uso
+if __name__ == "__main__":
+    # Criando uma pergunta
+    question1 = create_question(text="Qual é a capital do Brasil?", answer="Brasília")
+
+
+    # Obtendo todas as perguntas
+    all_questions = get_all_questions()
+    print("Todas as perguntas:", all_questions)
+
+
+    # Atualizando uma pergunta
+    update_question(question1.id, text="Qual é a capital da França?", answer="Paris")
+    updated_question = get_question_by_id(question1.id)
+    print("Pergunta atualizada:", updated_question)
+
+
+    # Excluindo uma pergunta
+    delete_question(question1.id)
+    remaining_questions = get_all_questions()
+    print("Perguntas restantes:", remaining_questions)
+"""
+
+
+
+
+
+
