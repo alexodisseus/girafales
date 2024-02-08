@@ -1,6 +1,11 @@
 from typing import Optional, List
+
 from sqlmodel import SQLModel ,or_, Field, create_engine, Session, select, Relationship
+#from sqlmodel.sql.expression import delete
+from sqlalchemy.sql.expression import delete as sql_delete
 from sqlalchemy import func
+
+
 
 
 db = SQLModel()
@@ -55,14 +60,65 @@ class User(SQLModel, table=True):
 
 # Definindo o modelo de pergunta
 
+
+
+
+
+
+# Definição das classes de modelo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Contest(SQLModel, table=True):
+	id: Optional[int] = Field(default=None, primary_key=True)
+	name: str
+	types: str
+	exams:List['Exam']=Relationship()
+
+
+
+class Exam(SQLModel, table=True):
+	id: Optional[int] = Field(default=None, primary_key=True)
+	name: str
+	year: str
+	description: str
+	types:str #para indicar se é a prova do concurso ou uma prova montada
+	contest_id: int = Field(foreign_key='contest.id')
+
+
+
+
 class Question(SQLModel, table=True):
 	id: Optional[int] = Field(default=None, primary_key=True)
 	text: str
 	answer: str
 	types:str
+	tag: Optional[str]
+
+
+class Question_exam(SQLModel, table=True):
+	id: Optional[int] = Field(default=None, primary_key=True)
+	exam_id: int = Field(foreign_key='exam.id')
+	question_id: int = Field(foreign_key='question.id')
 	
-
-
 
 
 engine = create_engine('sqlite:///db.db')
@@ -148,3 +204,92 @@ def delete_question(question_id: int) -> None:
             session.commit()
 
 
+
+
+
+# Operações CRUD para Contest
+def create_contest(db: Session, name: str, types: str) -> Contest:
+    contest = Contest(name=name, types=types)
+    db.add(contest)
+    db.commit()
+    db.refresh(contest)
+    return contest
+
+
+def get_contest(db: Session, contest_id: int) -> Optional[Contest]:
+    return db.get(Contest, contest_id)
+
+
+def update_contest(db: Session, contest_id: int, name: str, types: str) -> Optional[Contest]:
+    contest = get_contest(db, contest_id)
+    if contest:
+        contest.name = name
+        contest.types = types
+        db.commit()
+        db.refresh(contest)
+    return contest
+
+
+def delete_contest(db: Session, contest_id: int):
+    db.execute(delete(Contest).where(Contest.id == contest_id))
+    db.commit()
+
+
+# Operações CRUD para Exam
+def create_exam(db: Session, contest_id: int, name: str, year: str, description: str, types: str) -> Exam:
+    exam = Exam(contest_id=contest_id, name=name, year=year, description=description, types=types)
+    db.add(exam)
+    db.commit()
+    db.refresh(exam)
+    return exam
+
+
+def get_exam(db: Session, exam_id: int) -> Optional[Exam]:
+    return db.get(Exam, exam_id)
+
+
+def update_exam(db: Session, exam_id: int, name: str, year: str, description: str, types: str) -> Optional[Exam]:
+    exam = get_exam(db, exam_id)
+    if exam:
+        exam.name = name
+        exam.year = year
+        exam.description = description
+        exam.types = types
+        db.commit()
+        db.refresh(exam)
+    return exam
+
+
+def delete_exam(db: Session, exam_id: int):
+    db.execute(delete(Exam).where(Exam.id == exam_id))
+    db.commit()
+
+
+# Operações CRUD para Question
+def create_question(db: Session, text: str, answer: str, types: str, tag: str) -> Question:
+    question = Question(text=text, answer=answer, types=types, tag=tag)
+    db.add(question)
+    db.commit()
+    db.refresh(question)
+    return question
+
+
+def get_question(db: Session, question_id: int) -> Optional[Question]:
+    return db.get(Question, question_id)
+
+
+def update_question(db: Session, question_id: int, text: str, answer: str, types: str, tag: str) -> Optional[Question]:
+    question = get_question(db, question_id)
+    if question:
+        question.text = text
+        question.answer = answer
+        question.types = types
+        question.tag = tag
+        db.commit()
+        db.refresh(question)
+    return question
+
+
+def delete_question(db: Session, question_id: int):
+    db.execute(delete(Question).where(Question.id == question_id))
+    db.commit()
