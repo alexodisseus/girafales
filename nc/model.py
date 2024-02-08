@@ -90,7 +90,7 @@ class User(SQLModel, table=True):
 class Contest(SQLModel, table=True):
 	id: Optional[int] = Field(default=None, primary_key=True)
 	name: str
-	types: str
+	types: Optional[str]
 	exams:List['Exam']=Relationship()
 
 
@@ -168,6 +168,11 @@ def create_question(text: str, answer: str) -> Question:
         session.refresh(question)
     return question
 
+def get_all_conquest():
+	with Session(engine) as session:
+		query = select(Contest)
+		data = session.exec(query).all()
+		return data
 
 
 # Obter uma pergunta pelo ID
@@ -205,19 +210,21 @@ def delete_question(question_id: int) -> None:
 
 
 
-
-
 # Operações CRUD para Contest
-def create_contest(db: Session, name: str, types: str) -> Contest:
-    contest = Contest(name=name, types=types)
-    db.add(contest)
-    db.commit()
-    db.refresh(contest)
-    return contest
+def create_contest(name: str, types: str) -> Contest:
+    with Session(engine) as session:
+	    contest = Contest(name=name, types=types)
+	    session.add(contest)
+	    session.commit()
+	    session.refresh(contest)
+	    return contest
+
 
 
 def get_contest(db: Session, contest_id: int) -> Optional[Contest]:
     return db.get(Contest, contest_id)
+
+
 
 
 def update_contest(db: Session, contest_id: int, name: str, types: str) -> Optional[Contest]:
