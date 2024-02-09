@@ -19,7 +19,7 @@ def index():
 
 	#data = model.read_tasks(session['userid'])
 	
-	data = model.get_all_conquest()
+	data = model.get_all_contest()
 	
 	return render_template('quiz/index.html' , contests = data )
 	
@@ -46,6 +46,38 @@ def create_contest():
 		return redirect(url_for('quiz.index'))
 	
 	return render_template('quiz/create_contest.html' , data = asd )
+
+
+
+
+
+@quiz.route('/quiz_view/<id>', methods=['GET'])
+def view_contest(id):
+    
+	contest = model.get_id_contest(id)
+	return render_template('quiz/view_contest.html', contest=contest)
+
+
+
+
+
+
+
+@quiz.route('/quiz_edit/<id>', methods=['GET', 'POST'])
+def edit_contest(id):
+	contest = model.get_id_contest(id)
+
+	if request.method == 'POST':
+		contest.name = request.form['name']
+		contest.types = request.form['types']
+		asd = model.update_contest(id, contest.name, contest.types)
+		if asd:
+			return redirect(url_for('quiz.index'))
+	
+	return render_template('quiz/edit_contest.html', contest=contest)
+    
+
+
 
 
 

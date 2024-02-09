@@ -12,7 +12,7 @@
         <h1>View Contest</h1>
         <p><strong>Name:</strong> {{ contest.name }}</p>
         <p><strong>Types:</strong> {{ contest.types }}</p>
-        <a href="{{ url_for('edit_contest', id=contest.id) }}" class="btn btn-warning">Edit</a>
+        <a href="{{ url_for('quiz.edit_contest', id=contest.id) }}" class="btn btn-warning">Edit</a>
     </div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 from typing import Optional, List
 
 from sqlmodel import SQLModel ,or_, Field, create_engine, Session, select, Relationship
-#from sqlmodel.sql.expression import delete
 from sqlalchemy.sql.expression import delete as sql_delete
 from sqlalchemy import func
 
@@ -168,11 +167,28 @@ def create_question(text: str, answer: str) -> Question:
         session.refresh(question)
     return question
 
-def get_all_conquest():
+def get_all_contest():
 	with Session(engine) as session:
 		query = select(Contest)
 		data = session.exec(query).all()
 		return data
+
+def get_id_contest(id:int):
+	with Session(engine) as session:
+		
+		data = session.get(Contest , id)
+		return data
+
+def update_contest(contest_id: int, name: str, types: str) -> Contest:
+    with Session(engine) as session:
+        contest = session.get(Contest, contest_id)
+        if contest:
+            contest.name = name
+            contest.types = types
+            session.commit()
+            session.refresh(contest)
+            return contest
+        return None
 
 
 # Obter uma pergunta pelo ID
@@ -226,15 +242,6 @@ def get_contest(db: Session, contest_id: int) -> Optional[Contest]:
 
 
 
-
-def update_contest(db: Session, contest_id: int, name: str, types: str) -> Optional[Contest]:
-    contest = get_contest(db, contest_id)
-    if contest:
-        contest.name = name
-        contest.types = types
-        db.commit()
-        db.refresh(contest)
-    return contest
 
 
 def delete_contest(db: Session, contest_id: int):

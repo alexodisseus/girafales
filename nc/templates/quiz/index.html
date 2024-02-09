@@ -28,8 +28,8 @@
                     <td>{{ contest.name }}</td>
                     <td>{{ contest.types }}</td>
                     <td>
-                        <a href="{{ url_for('quiz.index', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="{{ url_for('quiz.index', id=contest.id) }}" class="btn btn-sm btn-info">View</a>
+                        <a href="{{ url_for('quiz.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ url_for('quiz.view_contest', id=contest.id) }}" class="btn btn-sm btn-info">View</a>
                     </td>
                 </tr>
                 {% endfor %}
