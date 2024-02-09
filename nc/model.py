@@ -137,6 +137,8 @@ def create_questions_from_dict(questions_dict: dict) -> List[Question]:
     		questions.append(question)
     return questions
 
+
+
 def get_all_questions() -> List[Question]:
     with Session(engine) as session:
         return session.exec(select(Question)).all()
@@ -203,6 +205,7 @@ def get_all_questions() -> List[Question]:
         return session.exec(select(Question)).all()
 
 
+
 # Atualizar uma pergunta existente
 def update_question(question_id: int, text: str, answer: str) -> Question:
     with Session(engine) as session:
@@ -249,13 +252,21 @@ def delete_contest(db: Session, contest_id: int):
     db.commit()
 
 
+
+
 # Operações CRUD para Exam
-def create_exam(db: Session, contest_id: int, name: str, year: str, description: str, types: str) -> Exam:
+def create_exam(contest_id: int, name: str, year: str, description: str, types: str) -> Exam:
     exam = Exam(contest_id=contest_id, name=name, year=year, description=description, types=types)
-    db.add(exam)
-    db.commit()
-    db.refresh(exam)
-    return exam
+    with Session(engine) as session:
+
+    session.add(exam)
+    session.commit()
+    session.refresh(exam)
+    
+    if exam:
+    	return exam
+    
+    return None
 
 
 def get_exam(db: Session, exam_id: int) -> Optional[Exam]:

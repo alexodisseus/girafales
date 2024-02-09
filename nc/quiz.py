@@ -49,15 +49,28 @@ def create_contest():
 
 
 
-
-
 @quiz.route('/quiz_view/<id>', methods=['GET'])
 def view_contest(id):
     
+
 	contest = model.get_id_contest(id)
+
 	return render_template('quiz/view_contest.html', contest=contest)
 
 
+
+
+@quiz.route('/exame_criar/<id>', methods=['GET' , 'POST'])
+def create_exam(id):
+    
+	contest = model.get_id_contest(id)
+	
+	if request.method == 'POST':
+		data = model.create_exam(id)
+		return redirect(url_for('quiz.index , id = 1'))
+
+
+	return render_template('quiz/create_exam.html', contest = contest)
 
 
 
