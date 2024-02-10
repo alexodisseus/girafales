@@ -259,12 +259,12 @@ def create_exam(contest_id: int, name: str, year: str, description: str, types: 
     exam = Exam(contest_id=contest_id, name=name, year=year, description=description, types=types)
     with Session(engine) as session:
 
-    session.add(exam)
-    session.commit()
-    session.refresh(exam)
-    
-    if exam:
-    	return exam
+	    session.add(exam)
+	    session.commit()
+	    session.refresh(exam)
+	    
+	    if exam:
+	    	return exam
     
     return None
 
