@@ -54,8 +54,10 @@ def view_contest(id):
     
 
 	contest = model.get_id_contest(id)
+	exams = model.get_exam_contest(contest.id)
+	print(exams)
 
-	return render_template('quiz/view_contest.html', contest=contest)
+	return render_template('quiz/view_contest.html', contest=contest , exams=exams)
 
 
 
@@ -64,10 +66,16 @@ def view_contest(id):
 def create_exam(id):
     
 	contest = model.get_id_contest(id)
-	
 	if request.method == 'POST':
-		data = model.create_exam(id)
-		return redirect(url_for('quiz.index , id = 1'))
+		name = request.form['name']
+		year = request.form['year']
+		description = request.form['description']
+		types = request.form['types']
+		contest_id = contest.id
+
+		data = model.create_exam(contest_id, name, year, description, types)
+		return redirect(url_for('quiz.view_contest' , id = contest.id))
+
 
 
 	return render_template('quiz/create_exam.html', contest = contest)

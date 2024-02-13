@@ -272,6 +272,14 @@ def create_exam(contest_id: int, name: str, year: str, description: str, types: 
 def get_exam(db: Session, exam_id: int) -> Optional[Exam]:
     return db.get(Exam, exam_id)
 
+def get_exam_contest(contest_id):
+
+	with Session(engine) as session:
+		contest = session.get(Contest, contest_id)
+		exams = contest.exams
+		return exams
+
+
 
 def update_exam(db: Session, exam_id: int, name: str, year: str, description: str, types: str) -> Optional[Exam]:
     exam = get_exam(db, exam_id)
