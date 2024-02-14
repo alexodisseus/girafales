@@ -280,6 +280,22 @@ def get_exam_contest(contest_id):
 		return exams
 
 
+def get_exam_by_id(id):
+	with Session(engine) as session:
+		#question =session.get( Question_exam)  
+		exam = session.get(Exam, id)
+		
+		return exam
+
+
+def get_all_questions_null(id):
+	with Session(engine) as session:
+		questions =session.get( Question , id)  
+		
+		
+		return questions
+
+
 
 def update_exam(db: Session, exam_id: int, name: str, year: str, description: str, types: str) -> Optional[Exam]:
     exam = get_exam(db, exam_id)

@@ -15,25 +15,28 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    Menu
+                    {{exam.name}}
                 </div>
                 <div class="card-body">
                     <div class="btn-group-vertical w-100">
-                        <button type="button" class="btn btn-light">Número de Questões: 20</button>
-                        <button type="button" class="btn btn-light">Tipo de Prova: Prova do Concurso</button>
+                        <button type="button" class="btn btn-light">Número 
+                        de Questões: {{exam.count}}</button>
+                        <button type="button" class="btn btn-light">Tipo de Prova: {{exam.types}}</button>
+                        <button type="button" class="btn btn-light">{{exam.description}}</button>
                         <!-- Adicione mais botões conforme necessário -->
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-primary">Editar Prova</button>
-                    <button type="button" class="btn btn-success">Realizar Prova</button>
+                    <a href="{{ url_for('quiz.go_exam', id=1) }}" class="btn btn-success">Realizar Prova</a>
+                    <a href="{{ url_for('quiz.edit_exam', id=1) }}" class="btn btn-info">Editar Prova</a>
+                    
                 </div>
             </div>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-md-12">
-            <h2 class="text-center">Título das Questões</h2>
+            <h2 class="text-center">Questões</h2>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Questão 1</h5>

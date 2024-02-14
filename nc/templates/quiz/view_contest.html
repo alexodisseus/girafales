@@ -16,8 +16,6 @@
         <h1>View Contest</h1>
         <p><strong>Name:</strong> {{ contest.name }}</p>
         <p><strong>Types:</strong> {{ contest.types }}</p>
-        <a href="{{ url_for('quiz.edit_contest', id=contest.id) }}" class="btn btn-warning">Edit</a>
-        <a href="{{ url_for('quiz.create_exam', id=contest.id) }}" class="btn btn-warning">Adicionar</a>
     </div>
     <div class="container mt-5">
     <h2>Lista de Provas</h2>
@@ -50,6 +48,8 @@
             {% endfor %}
         </tbody>
     </table>
+        <a href="{{ url_for('quiz.create_exam', id=contest.id) }}" class="btn btn-info">Adicionar</a>
+    
 </div>
 </div>
 

@@ -63,11 +63,30 @@ def view_contest(id):
 @quiz.route('/exame_view/<id>', methods=['GET'])
 def view_exam(id):
     
-
-	exams = model.get_exam_contest(id)
+	exam = model.get_exam_by_id(id)
 	
+	return render_template('quiz/view_exam.html' , exam=exam)
 
-	return render_template('quiz/view_exam.html' , exams=exams)
+@quiz.route('/exame_editar/<id>', methods=['GET'])
+def edit_exam(id):
+    
+	questions = model.get_all_questions_null(id)
+	
+	return render_template('quiz/edit_exam.html' , questions=questions)
+
+
+
+
+@quiz.route('/realizar_exame/<id>', methods=['GET'])
+
+def go_exam(id):
+   
+	exam = model.get_exam_by_id(id)
+
+	return render_template('quiz/go_exam.html' , exam=exam)
+
+
+
 
 
 @quiz.route('/exame_criar/<id>', methods=['GET' , 'POST'])
