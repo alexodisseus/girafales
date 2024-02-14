@@ -9,7 +9,7 @@
                  
 {% endblock %}
 {% block content %}
-{{exams}}
+
 <div class="container">
     
     <div class="container">
@@ -29,7 +29,7 @@
                 <th>Ano</th>
                 <th>Descrição</th>
                 <th>Tipo</th>
-                <th>ID do Concurso</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -40,7 +40,12 @@
                 <td>{{ Exam.year }}</td>
                 <td>{{ Exam.description }}</td>
                 <td>{{ Exam.types }}</td>
-                <td>{{ Exam.contest_id }}</td>
+                <td>
+                <!--  
+                <a href="{{ url_for('quiz.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                -->
+                <a href="{{ url_for('quiz.view_exam', id=Exam.id) }}" class="btn btn-sm btn-info">View</a>
+                    </td>
             </tr>
             {% endfor %}
         </tbody>

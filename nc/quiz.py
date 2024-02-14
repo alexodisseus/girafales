@@ -55,11 +55,19 @@ def view_contest(id):
 
 	contest = model.get_id_contest(id)
 	exams = model.get_exam_contest(contest.id)
-	print(exams)
+	
 
 	return render_template('quiz/view_contest.html', contest=contest , exams=exams)
 
 
+@quiz.route('/exame_view/<id>', methods=['GET'])
+def view_exam(id):
+    
+
+	exams = model.get_exam_contest(id)
+	
+
+	return render_template('quiz/view_exam.html' , exams=exams)
 
 
 @quiz.route('/exame_criar/<id>', methods=['GET' , 'POST'])

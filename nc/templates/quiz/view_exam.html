@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Menu
+                </div>
+                <div class="card-body">
+                    <div class="btn-group-vertical w-100">
+                        <button type="button" class="btn btn-light">Número de Questões: 20</button>
+                        <button type="button" class="btn btn-light">Tipo de Prova: Prova do Concurso</button>
+                        <!-- Adicione mais botões conforme necessário -->
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary">Editar Prova</button>
+                    <button type="button" class="btn btn-success">Realizar Prova</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2 class="text-center">Título das Questões</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Questão 1</h5>
+                    <p class="card-text">Enunciado da questão 1...</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Questão 2</h5>
+                    <p class="card-text">Enunciado da questão 2...</p>
+                </div>
+            </div>
+            <!-- Adicione mais cartões de questões aqui conforme necessário -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
