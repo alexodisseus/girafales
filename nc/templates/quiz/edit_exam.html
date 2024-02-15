@@ -1,3 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +41,33 @@
     
     <div class="col-md-6">
       <h3>Adicionar ao Teste</h3>
+      <div>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Buscar">
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-matematica" value="matematica">
+              <label class="form-check-label" for="materia-matematica">Matemática</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-portugues" value="portugues">
+              <label class="form-check-label" for="materia-portugues">Português</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-legislacao" value="legislacao">
+              <label class="form-check-label" for="materia-legislacao">Legislação</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-conhecimentos-gerais" value="conhecimentos-gerais">
+              <label class="form-check-label" for="materia-conhecimentos-gerais">Conhecimentos Gerais</label>
+            </div>
+          <i class="fas fa-plus search-btn"></i>
+          </div>
+        </div>
+      
       <div id="sortable2" class="sortable-list">
+        
         <div class="card">
           <div class="card-body">
             Card 3 - Adicionar ao teste
@@ -64,16 +102,75 @@
             Card 2 - Teste em edição
           </div>
           <div class="card-footer text-end">
-            <i class="fas fa-plus action-btn"></i>
+            <i id="filtrar" class="fas fa-plus action-btn"></i>
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 <script>
+    let currentPage = 1;
+
+var x = 0;
+function loadData(){    
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function(){
+      appendDataToTable(this.responseText)
+
+    //document.getElementById('tabelabody').innerHTML = this.responseText;
+      }
+   
+  xmlhttp.open("GET","/pagamentos/ajax?page="+x, true);
+  x=x+10;
+  xmlhttp.send();
+    
+}
+
+
+var codigo = 12
+alert(codigo)
+function filtraData(){    
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function(){
+      
+      //var codigo = document.getElementById('codigo').value
+      var codigo = 12
+      alert(codigo)
+      recallDataToTable(this.responseText)
+
+    //document.getElementById('tabelabody'). = this.responseText;
+      }
+   
+  //xmlhttp.open("GET","/pagamentos/ajax?page="+x+"&codigo="+codigo.value, true);
+  xmlhttp.open("GET","/pagamentos/ajax?page="+x+"&codigo="+codigo, true);
+  x=x+10;
+  xmlhttp.send();
+    
+}
+
+// Função para adicionar dados à tabela
+function  recallDataToTable(data) {
+    const tbody = $('#tabelabody');
+      const row = $(data);
+      tbody = row;
+
+    
+}
+
+// Função para adicionar dados à tabela
+function appendDataToTable(data) {
+    const tbody = $('#tabelabody');
+      const row = $(data);
+      tbody.append(row);
+    
+}
+
+
+
   const sortable1 = new Sortable(document.getElementById('sortable1'), {
     group: 'shared',
     animation: 150,
@@ -98,6 +195,21 @@
       targetList.appendChild(card);
     });
   });
+
+  document.querySelectorAll('.search-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      alert("10");
+      filtraData();
+      const card = button.closest('.card');
+      const parentList = card.closest('.sortable-list');
+      const targetList = parentList.id === 'sortable1' ? document.getElementById('sortable2') : document.getElementById('sortable1');
+      targetList.appendChild(card);
+    });
+  });
+
+
 </script>
 </body>
 </html>
+
+{% endblock %}
