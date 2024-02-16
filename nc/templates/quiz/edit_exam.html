@@ -124,7 +124,7 @@ function loadData(){
     //document.getElementById('tabelabody').innerHTML = this.responseText;
       }
    
-  xmlhttp.open("GET","/pagamentos/ajax?page="+x, true);
+  xmlhttp.open("GET","/quiz/ajax?page="+x, true);
   x=x+10;
   xmlhttp.send();
     
@@ -132,21 +132,21 @@ function loadData(){
 
 
 var codigo = 12
-alert(codigo)
+//alert(codigo)
 function filtraData(){    
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.onreadystatechange=function(){
       
       //var codigo = document.getElementById('codigo').value
       var codigo = 12
-      alert(codigo)
+      //alert(codigo)
       recallDataToTable(this.responseText)
 
     //document.getElementById('tabelabody'). = this.responseText;
       }
    
-  //xmlhttp.open("GET","/pagamentos/ajax?page="+x+"&codigo="+codigo.value, true);
-  xmlhttp.open("GET","/pagamentos/ajax?page="+x+"&codigo="+codigo, true);
+  //xmlhttp.open("GET","/quiz/ajax?page="+x+"&codigo="+codigo.value, true);
+  xmlhttp.open("GET","/quiz/ajax?page="+x+"&codigo="+codigo, true);
   x=x+10;
   xmlhttp.send();
     
@@ -154,18 +154,27 @@ function filtraData(){
 
 // Função para adicionar dados à tabela
 function  recallDataToTable(data) {
-    const tbody = $('#tabelabody');
+    alert(data);
+    const div = $('#sortable1');
+    alert(div);
+      
       const row = $(data);
-      tbody = row;
+    alert(row);
+      div = row;
+    alert(div);
 
     
 }
 
 // Função para adicionar dados à tabela
 function appendDataToTable(data) {
-    const tbody = $('#tabelabody');
-      const row = $(data);
-      tbody.append(row);
+  const targetList = document.getElementById('sortable1');
+      targetList.appendChild(data);
+    
+
+    //const tbody = $('#tabelabody');
+     // const row = $(data);
+      //tbody.append(row);
     
 }
 
@@ -198,7 +207,7 @@ function appendDataToTable(data) {
 
   document.querySelectorAll('.search-btn').forEach(button => {
     button.addEventListener('click', () => {
-      alert("10");
+      //alert("10");
       filtraData();
       const card = button.closest('.card');
       const parentList = card.closest('.sortable-list');

@@ -279,6 +279,13 @@ def get_exam_contest(contest_id):
 		exams = contest.exams
 		return exams
 
+def get_search_question(search):
+	with Session(engine) as session:
+		question = session.get(Question, 1)
+		
+		return question
+
+
 
 def get_exam_by_id(id):
 	with Session(engine) as session:

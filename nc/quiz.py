@@ -74,6 +74,19 @@ def edit_exam(id):
 	
 	return render_template('quiz/edit_exam.html' , questions=questions)
 
+@quiz.route('/ajax', methods=['GET'])
+def ajax_quiz():
+	asd = request.args.get('codigo')
+	asd1 = request.args.get('page')
+	print(asd)
+	print(asd1)
+	print("asd")
+	aaaa = []
+	data = model.get_search_question(asd)
+	aaaa.append(data)
+	print(aaaa)
+
+	return render_template('quiz/ajax_quiz.html',data=aaaa)
 
 
 
