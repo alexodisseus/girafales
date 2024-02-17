@@ -43,7 +43,7 @@
       <h3>Adicionar ao Teste</h3>
       <div>
           <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Buscar">
+            <input type="text" id="busca" class="form-control" placeholder="Buscar">
           </div>
           <div class="mb-3">
             <div class="form-check form-check-inline">
@@ -118,16 +118,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 <script>
 
-var x = 0;
+var busca = "";
 function loadData(){    
   var xmlhttp=new XMLHttpRequest();
+  busca = document.getElementById('busca').value 
   xmlhttp.onreadystatechange=function(){
     
     document.getElementById('sortable2').innerHTML = this.responseText;
       }
    
-  xmlhttp.open("GET","/quiz/ajax?page="+x, true);
-  x=x+10;
+  xmlhttp.open("GET","/quiz/ajax?busca="+busca, true);
+  
   xmlhttp.send();
     
 }
@@ -161,8 +162,8 @@ function loadData(){
   document.querySelectorAll('.search-btn').forEach(button => {
     button.addEventListener('click', () => {
 
-      const card = button.closest('.card');
       loadData()
+      const card = button.closest('.card');
       const parentList = card.closest('.sortable-list');
       const targetList = parentList.id === 'sortable1' ? document.getElementById('sortable2') : document.getElementById('sortable1');
       targetList.appendChild(card);

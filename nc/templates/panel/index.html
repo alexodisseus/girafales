@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <h2>Gerador de Questionário</h2>
 
-        <form action="{{url_for('panel.generate_quiz')}}" method="post">
+        <form action="{{url_for('panel.generate_quiz' , id= id)}}" method="post">
             <div class="form-group">
                 <label for="text">Digite o texto:</label>
                 <textarea class="form-control" id="text" name="text" rows="5" required></textarea>

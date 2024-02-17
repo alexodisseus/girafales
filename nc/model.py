@@ -280,10 +280,12 @@ def get_exam_contest(contest_id):
 		return exams
 
 def get_search_question(search):
+
 	with Session(engine) as session:
-		question = session.get(Question, 1)
+		query = select(Question).where(Question.text.contains(search))
+		data = session.exec(query).all()
 		
-		return question
+		return data
 
 
 

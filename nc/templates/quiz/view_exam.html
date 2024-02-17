@@ -27,8 +27,10 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ url_for('quiz.go_exam', id=1) }}" class="btn btn-success">Realizar Prova</a>
-                    <a href="{{ url_for('quiz.edit_exam', id=1) }}" class="btn btn-info">Editar Prova</a>
+                    <a href="{{ url_for('quiz.go_exam', id=exam.id) }}" class="btn btn-success">Realizar Prova</a>
+                    <a href="{{ url_for('quiz.edit_exam', id=exam.id) }}" class="btn btn-info">Editar Prova</a>
+                    <a href="{{ url_for('panel.index', id=exam.id) }}" class="btn btn-info">Incluir Questão</a>
+                    <a href="{{ url_for('panel.index', id=exam.id) }}" class="btn btn-info">Incluir Questões</a>
                     
                 </div>
             </div>

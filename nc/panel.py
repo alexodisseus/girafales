@@ -17,21 +17,23 @@ panel = Blueprint('panel' , __name__ , url_prefix='/painel')
 #usado para administrar os usuarios do sistema
 @panel.route('/', methods = ['GET','POST'])
 def index():
-	"""
-	if 'username' not in session:
-		return redirect(url_for('admin.login'))
+    """
+    if 'username' not in session:
+    	return redirect(url_for('admin.login'))
 
-	"""
+    """
+    #data = model.read_tasks(session['userid'])
+    asd  = request.args.get('id')
 
-	#data = model.read_tasks(session['userid'])
-	
-	return render_template('panel/index.html' )
-	#return render_template('login.html' )
+    return render_template('panel/index.html'  , id = asd)
+
+    #return render_template('login.html' )
 
 
 
 @panel.route('/generate_quiz', methods=['POST'])
 def generate_quiz():
+    asd  = request.args.get('id')
     
     text = request.form['text']
     
@@ -39,18 +41,21 @@ def generate_quiz():
     headers = []
     headers.append(header)
 
-    return render_template('panel/view.html', questions=numbered_questions , headers = headers)
+    return render_template('panel/view.html', questions=numbered_questions , headers = headers , id = asd)
 
 
 
 @panel.route('/quiz_create', methods=['POST'])
 def quiz_create():
+    asd  = request.args.get('id')
     
     todos_os_parametros = request.form.to_dict()
     created_questions = model.create_questions_from_dict(todos_os_parametros)
     
-    return redirect(url_for('quiz.index'))
-    return render_template('quiz/view.html', questions=asd)
+    if created_questions:
+        return redirect(url_for('quiz.view_exam' , id = asd))
+    
+    return redirect(url_for('panel.generate_quiz' , id = asd))
 
 
 

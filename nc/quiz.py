@@ -78,15 +78,14 @@ def edit_exam(id):
 def ajax_quiz():
 	asd = request.args.get('codigo')
 	asd1 = request.args.get('page')
+	busca = request.args.get('busca')
 	print(asd)
 	print(asd1)
+	print(busca)
 	print("asd")
-	aaaa = []
-	data = model.get_search_question(asd)
-	aaaa.append(data)
-	print(aaaa)
-
-	return render_template('quiz/ajax_quiz.html',data=aaaa)
+	data = model.get_search_question(busca)
+	
+	return render_template('quiz/ajax_quiz.html',data=data)
 
 
 

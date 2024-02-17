@@ -19,8 +19,35 @@
 <body>
     <div class="container mt-5">
         <h2>Questionário</h2>
-        <form action="{{url_for('panel.quiz_create')}}" method="post" id="quizForm">
-            
+        <form action="{{url_for('panel.quiz_create' , id = id)}}" method="post" id="quizForm">
+            <div class="container mt-5">
+    <h3>Selecione as opções desejadas:</h3>
+    <div class="form-inline">
+      <div class="form-check mr-3">
+        <input type="checkbox" class="form-check-input" id="matematica" name="matematica">
+        <label class="form-check-label" for="matematica">Matemática</label>
+      </div>
+      <div class="form-check mr-3">
+        <input type="checkbox" class="form-check-input" id="portugues" name="portugues">
+        <label class="form-check-label" for="portugues">Português</label>
+      </div>
+      <div class="form-check mr-3">
+        <input type="checkbox" class="form-check-input" id="legislacao" name="legislacao">
+        <label class="form-check-label" for="legislacao">Legislação</label>
+      </div>
+      <div class="form-check mr-3">
+        <input type="checkbox" class="form-check-input" id="conhecimentos-gerais" name="conhecimentos-gerais">
+        <label class="form-check-label" for="conhecimentos-gerais">Conhecimentos Gerais</label>
+      </div>
+      <div class="form-check mr-3">
+        <input type="checkbox" class="form-check-input" id="conhecimentos-especificos" name="conhecimentos-especificos">
+        <label class="form-check-label" for="conhecimentos-especificos">Conhecimentos Específicos</label>
+      </div>
+    </div>
+
+
+      
+  </div>
             {% for x in headers %}
             <div class="card mt-3">
                 <div class="card-body">
@@ -111,7 +138,6 @@
     </script>
 </body>
 </html>
-
 
 {% endblock %}
 
