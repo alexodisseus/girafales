@@ -40,15 +40,15 @@
                 <td>{{ Exam.types }}</td>
                 <td>
                 <!--  
-                <a href="{{ url_for('quiz.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{{ url_for('contest.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
                 -->
-                <a href="{{ url_for('quiz.view_exam', id=Exam.id) }}" class="btn btn-sm btn-info">View</a>
+                <a href="{{ url_for('contest.view_exam', id=Exam.id) }}" class="btn btn-sm btn-info">View</a>
                     </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-        <a href="{{ url_for('quiz.create_exam', id=contest.id) }}" class="btn btn-info">Adicionar</a>
+        <a href="{{ url_for('contest.create_exam', id=contest.id) }}" class="btn btn-info">Adicionar</a>
     
 </div>
 </div>

@@ -1,5 +1,5 @@
 import admin
-import quiz
+import contest
 import model
 import panel
 
@@ -17,7 +17,7 @@ app.secret_key = b'guerra aos senhores'
 
 
 admin.configure(app)
-quiz.configure(app)
+contest.configure(app)
 panel.configure(app)
 db.configure(app)
 

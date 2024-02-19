@@ -12,7 +12,7 @@
 
     <div class="container">
         <h1>Contests</h1>
-        <a href="{{ url_for('quiz.create_contest') }}" class="btn btn-primary">Create Contest</a>
+        <a href="{{ url_for('contest.create_contest') }}" class="btn btn-primary">Create Contest</a>
         <table class="table mt-3">
             <thead>
                 <tr>
@@ -29,8 +29,8 @@
                     <td>{{ contest.name }}</td>
                     <td>{{ contest.types }}</td>
                     <td>
-                        <a href="{{ url_for('quiz.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="{{ url_for('quiz.view_contest', id=contest.id) }}" class="btn btn-sm btn-info">View</a>
+                        <a href="{{ url_for('contest.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ url_for('contest.view_contest', id=contest.id) }}" class="btn btn-sm btn-info">View</a>
                     </td>
                 </tr>
                 {% endfor %}

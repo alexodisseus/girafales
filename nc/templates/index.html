@@ -1,18 +1,51 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vindo</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fonte Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #212529; /* Cor de fundo escura */
+      color: #ffffff; /* Cor do texto */
+    }
+    .welcome-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn-start {
+      font-size: 1.5rem;
+      padding: 10px 30px;
+      border-radius: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-container">
+    <h1>Bem-vindo!</h1>
+    <p>Projeto para estudo, girafales!.</p>
+    <a href="{{url_for('contest.index')}}" class="btn btn-primary btn-lg btn-start">Começar</a>
+  </div>
 
 
-{% block styles %}
-    <!-- Bootstrap CSS -->
-    {{ bootstrap.load_css() }}
-    <link rel="stylesheet"
-                  href="{{url_for('static', filename='index.css')}}">
-                 
-{% endblock %}
-{% block content %}
 
-<div class="container">
-    {{data}}
-    xlçlmvçlmçm
-</div>
+  <!-- Bootstrap JS (opcional, apenas se você precisar de funcionalidades JavaScript do Bootstrap) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-{% endblock %}
+
+
+
+
+
+  </body>
+</html>

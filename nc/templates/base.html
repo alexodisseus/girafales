@@ -1,45 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <head>
         {% block head %}
         <!-- Required meta tags -->
         <meta charset="iso-8859-1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        {% block styles %}
+                {% block styles %}
             <!-- Bootstrap CSS -->
             {{ bootstrap.load_css() }}
         {% endblock %}
 
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <style>
+            body {
+              font-family: 'Roboto', sans-serif;
+              background-color: #212529; /* Cor de fundo escura */
+              color: #ffffff !important; /* Cor do texto */
+            }
+            .table {
+              font-family: 'Roboto', sans-serif;
+              background-color: #212529; /* Cor de fundo escura */
+              color: #ffffff !important; /* Cor do texto */
+            }
+
+            .nav-link {
+              color: #ffffff !important; /* Cor do texto do menu */
+            }
+            .footer {
+              bottom: 0;
+              width: 100%;
+              background-color: #343a40; /* Cor de fundo do rodapé */
+              padding: 10px 0;
+              text-align: center;
+            }
+          </style>
+      
+
         <title>Simulador de concurso - girafales</title>
         {% endblock %}
     </head>
-<body class="">
-  <ul>
-    <li >
-      <a href="{{url_for('quiz.index')}}">
-        
-      concursos
-      </a>
-    </li>
-    <li>
-      <a href="{{url_for('quiz.index')}}">
-      bancas
-    </a>
-    </li>
-    <li>
-      <a href="{{url_for('admin.login')}}">
-      login
-    </a>
-    </li>
 
-  </ul>
+<body>
+  
+ <ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{url_for('admin.index')}}">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url_for('contest.index')}}">Concursos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url_for('contest.index')}}">Bancas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url_for('admin.login')}}">Login</a>
+  </li>
+</ul>
 
-
-
-
-
-<div class="container mt-4">
+  <div class="content">
 
   <!-- Conteúdo da página aqui -->
   {% block content %}
@@ -48,27 +66,35 @@
   {% endblock %}
   {% block content2 %}
   {% endblock %}
+  </div>
 
-</div>
-
-<div class="d-flex justify-content-center mt-3 bg-light align-items-center">
-  
- <blockquote class="blockquote mb-4 mt-4">
-      <p>Simulador de concurso - Girafales</p>
+  <footer class="footer bd-footer py-4 py-md-5 mt-5 bg-body-tertiary">
+    <p>Simulador de concurso - Girafales</p>
       <footer class="blockquote-footer">Desenvolvimento <cite title="Source Title">Continuo</cite></footer>
-    </blockquote>
+  </footer>
 
-</div>
-
+  <!-- Bootstrap JS (opcional, apenas se você precisar de funcionalidades JavaScript do Bootstrap) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       {% block scripts %}
             <!-- Optional JavaScript -->
             {{ bootstrap.load_js() }}
         {% endblock %}
 
-<script type="text/javascript"></script>
-
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 

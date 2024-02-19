@@ -5,11 +5,11 @@ import model
 from flask import Blueprint, render_template, current_app , request , session, redirect, url_for
 
 
-quiz = Blueprint('quiz' , __name__ , url_prefix='/quiz')
+contest = Blueprint('contest' , __name__ , url_prefix='/concursos')
 
 
 #usado para administrar os usuarios do sistema
-@quiz.route('/', methods = ['GET','POST'])
+@contest.route('/', methods = ['GET','POST'])
 def index():
 	"""
 	if 'username' not in session:
@@ -21,14 +21,14 @@ def index():
 	
 	data = model.get_all_contest()
 	
-	return render_template('quiz/index.html' , contests = data )
+	return render_template('contest/index.html' , contests = data )
 	
 
 
 
 
 
-@quiz.route('/cadastrar_concurso', methods = ['GET','POST'])
+@contest.route('/cadastrar_concurso', methods = ['GET','POST'])
 def create_contest():
 	"""
 	if 'username' not in session:
@@ -43,13 +43,13 @@ def create_contest():
 		types = request.form['types']
 		model.create_contest(name,types)
 		
-		return redirect(url_for('quiz.index'))
+		return redirect(url_for('contest.index'))
 	
-	return render_template('quiz/create_contest.html' , data = asd )
+	return render_template('contest/create_contest.html' , data = asd )
 
 
 
-@quiz.route('/quiz_view/<id>', methods=['GET'])
+@contest.route('/contest_view/<id>', methods=['GET'])
 def view_contest(id):
     
 
@@ -57,25 +57,25 @@ def view_contest(id):
 	exams = model.get_exam_contest(contest.id)
 	
 
-	return render_template('quiz/view_contest.html', contest=contest , exams=exams)
+	return render_template('contest/view_contest.html', contest=contest , exams=exams)
 
 
-@quiz.route('/exame_view/<id>', methods=['GET'])
+@contest.route('/exame_view/<id>', methods=['GET'])
 def view_exam(id):
     
 	exam = model.get_exam_by_id(id)
 	
-	return render_template('quiz/view_exam.html' , exam=exam)
+	return render_template('contest/view_exam.html' , exam=exam)
 
-@quiz.route('/exame_editar/<id>', methods=['GET'])
+@contest.route('/exame_editar/<id>', methods=['GET'])
 def edit_exam(id):
     
 	questions = model.get_all_questions_null(id)
 	
-	return render_template('quiz/edit_exam.html' , questions=questions)
+	return render_template('contest/edit_exam.html' , questions=questions)
 
-@quiz.route('/ajax', methods=['GET'])
-def ajax_quiz():
+@contest.route('/ajax', methods=['GET'])
+def ajax_contest():
 	asd = request.args.get('codigo')
 	asd1 = request.args.get('page')
 	busca = request.args.get('busca')
@@ -85,23 +85,23 @@ def ajax_quiz():
 	print("asd")
 	data = model.get_search_question(busca)
 	
-	return render_template('quiz/ajax_quiz.html',data=data)
+	return render_template('contest/ajax_contest.html',data=data)
 
 
 
-@quiz.route('/realizar_exame/<id>', methods=['GET'])
+@contest.route('/realizar_exame/<id>', methods=['GET'])
 
 def go_exam(id):
    
 	exam = model.get_exam_by_id(id)
 
-	return render_template('quiz/go_exam.html' , exam=exam)
+	return render_template('contest/go_exam.html' , exam=exam)
 
 
 
 
 
-@quiz.route('/exame_criar/<id>', methods=['GET' , 'POST'])
+@contest.route('/exame_criar/<id>', methods=['GET' , 'POST'])
 def create_exam(id):
     
 	contest = model.get_id_contest(id)
@@ -113,17 +113,17 @@ def create_exam(id):
 		contest_id = contest.id
 
 		data = model.create_exam(contest_id, name, year, description, types)
-		return redirect(url_for('quiz.view_contest' , id = contest.id))
+		return redirect(url_for('contest.view_contest' , id = contest.id))
 
 
 
-	return render_template('quiz/create_exam.html', contest = contest)
+	return render_template('contest/create_exam.html', contest = contest)
 
 
 
 
 
-@quiz.route('/quiz_edit/<id>', methods=['GET', 'POST'])
+@contest.route('/contest_edit/<id>', methods=['GET', 'POST'])
 def edit_contest(id):
 	contest = model.get_id_contest(id)
 
@@ -132,9 +132,9 @@ def edit_contest(id):
 		contest.types = request.form['types']
 		asd = model.update_contest(id, contest.name, contest.types)
 		if asd:
-			return redirect(url_for('quiz.index'))
+			return redirect(url_for('contest.index'))
 	
-	return render_template('quiz/edit_contest.html', contest=contest)
+	return render_template('contest/edit_contest.html', contest=contest)
     
 
 
@@ -142,4 +142,4 @@ def edit_contest(id):
 
 
 def configure(app):
-	app.register_blueprint(quiz)
+	app.register_blueprint(contest)
