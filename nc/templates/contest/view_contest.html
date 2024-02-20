@@ -13,13 +13,13 @@
 <div class="container">
     
     <div class="container">
-        <h1>View Contest</h1>
-        <p><strong>Name:</strong> {{ contest.name }}</p>
-        <p><strong>Types:</strong> {{ contest.types }}</p>
+        <h1>Concurso</h1>
+        <p><strong>Nome:</strong> {{ contest.name }}</p>
+        <p><strong>Tipo:</strong> {{ contest.types }}</p>
     </div>
     <div class="container mt-5">
     <h2>Lista de Provas</h2>
-    <table class="table">
+    <table class="table table-dark table-striped mt-3">
         <thead>
             <tr>
                 <th>ID</th>
@@ -27,7 +27,7 @@
                 <th>Ano</th>
                 <th>Descrição</th>
                 <th>Tipo</th>
-                <th>Actions</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +42,7 @@
                 <!--  
                 <a href="{{ url_for('contest.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
                 -->
-                <a href="{{ url_for('contest.view_exam', id=Exam.id) }}" class="btn btn-sm btn-info">View</a>
+                <a href="{{ url_for('contest.view_exam', id=Exam.id) }}" class="btn btn-sm btn-outline-info">View</a>
                     </td>
             </tr>
             {% endfor %}
