@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Teste</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    .sortable-list {
+      min-height: 300px;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .sortable-list .card {
+      margin-bottom: 10px;
+    }
+    .card-header .action-btn {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row">
+    
+    <div class="col-md-6">
+      <h3>Adicionar ao Teste</h3>
+      <div>
+          <div class="mb-3">
+            <input type="text" id="busca" class="form-control" placeholder="Buscar">
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-matematica" value="matematica">
+              <label class="form-check-label" for="materia-matematica">Matemática</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-portugues" value="portugues">
+              <label class="form-check-label" for="materia-portugues">Português</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-legislacao" value="legislacao">
+              <label class="form-check-label" for="materia-legislacao">Legislação</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="materia-conhecimentos-gerais" value="conhecimentos-gerais">
+              <label class="form-check-label" for="materia-conhecimentos-gerais">Conhecimentos Gerais</label>
+            </div>
+            <div class="form-check form-check-inline">
+            
+              <button class="fas fa-plus search-btn"></button>
+            </div>
+          </div>
+        </div>
+        
+      <div id="sortable2" class="sortable-list">
+        
+        
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h3>Teste em Edição</h3>
+      <div id="sortable1" class="sortable-list">
+        <div class="card">
+          <div class="card-body">
+            Card 1 - Teste em edição
+          </div>
+          <div class="card-footer text-end">
+            <i class="fas fa-plus action-btn"></i>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            Card 2 - Teste em edição
+          </div>
+          <div class="card-footer text-end">
+            <i id="filtrar" class="fas fa-plus action-btn"></i>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            Card 3 - Adicionar ao teste
+          </div>
+          <div class="card-footer text-end">
+            <i class="fas fa-plus action-btn"></i>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            Card 4 - Adicionar ao teste
+          </div>
+          <div class="card-footer text-end">
+            <i class="fas fa-plus action-btn"></i>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script>
+
+var busca = "";
+function loadData(){    
+  var xmlhttp=new XMLHttpRequest();
+  busca = document.getElementById('busca').value 
+  xmlhttp.onreadystatechange=function(){
+    
+    document.getElementById('sortable2').innerHTML = this.responseText;
+      }
+   
+  xmlhttp.open("GET","/quiz/ajax?busca="+busca, true);
+  
+  xmlhttp.send();
+    
+}
+
+
+  const sortable1 = new Sortable(document.getElementById('sortable1'), {
+    group: 'shared',
+    animation: 150,
+    onEnd: function(evt) {
+      
+    }
+  });
+
+  const sortable2 = new Sortable(document.getElementById('sortable2'), {
+    group: 'shared',
+    animation: 150,
+    onEnd: function(evt) {
+      
+    }
+  });
+
+  document.querySelectorAll('.action-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.card');
+      const parentList = card.closest('.sortable-list');
+      const targetList = parentList.id === 'sortable1' ? document.getElementById('sortable2') : document.getElementById('sortable1');
+      targetList.appendChild(card);
+    });
+  });
+
+  document.querySelectorAll('.search-btn').forEach(button => {
+    button.addEventListener('click', () => {
+
+      loadData()
+      const card = button.closest('.card');
+      const parentList = card.closest('.sortable-list');
+      const targetList = parentList.id === 'sortable1' ? document.getElementById('sortable2') : document.getElementById('sortable1');
+      targetList.appendChild(card);
+    });
+  });
+
+
+</script>
+</body>
+</html>
+
+{% endblock %}

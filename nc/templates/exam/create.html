@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Cadastro de Provas</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="contest_id">Concurso:</label>
+            
+            <select class="form-control" name="contest_id" id="contest_id" disabled>
+                <option value="{{contest.id}}" selected>{{contest.name}}</option>
+            </select>
+        
+        </div>
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Vunesp? Cesgranrio?">
+        </div>
+        <div class="form-group">
+            <label for="year">Ano:</label>
+            <input type="text" class="form-control" name="year" id="year" placeholder="Digite o ano da prova">
+        </div>
+        <div class="form-group">
+            <label for="types">Tipo:</label>
+            <select class="form-control" name="types" id="types">
+                <option value="prova_concurso">Prova do concurso</option>
+                <option value="prova_montada">Prova montada</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Descrição:</label>
+            <textarea class="form-control" name="description" id="description" rows="2" placeholder="prova ano de xx real ou prova montada matemática"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
+
+{% endblock %}

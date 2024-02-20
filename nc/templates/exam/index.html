@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <h1>Contests</h1>
+        <a href="{{ url_for('contest.create_contest') }}" 
+        class="btn btn-outline-info">Cadastrar concurso</a>
+        <table class="table table-dark table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Types</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contest in contests %}
+                <tr>
+                    <td>{{ contest.id }}</td>
+                    <td>{{ contest.name }}</td>
+                    <td>{{ contest.types }}</td>
+                    <td>
+                        <a href="{{ url_for('contest.edit_contest', id=contest.id) }}"  class="btn btn-sm btn-outline-success">Editar</a>
+                        <a href="{{ url_for('contest.view_contest', id=contest.id) }}" class="btn btn-sm btn-outline-info">Ver</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}

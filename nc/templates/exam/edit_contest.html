@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+
+
+
+    <div class="container">
+        <h1>Edit Contest</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ contest.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="types" class="form-label">Types</label>
+                <input type="text" class="form-control" id="types" name="types" value="{{ contest.types }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    {{exam.name}}
+                </div>
+                <div class="card-body">
+                    <div class="btn-group-vertical w-100">
+                        <button type="button" class="btn btn-light">Número 
+                        de Questões: {{exam.count}}</button>
+                        <button type="button" class="btn btn-light">Tipo de Prova: {{exam.types}}</button>
+                        <button type="button" class="btn btn-light">{{exam.description}}</button>
+                        <!-- Adicione mais botões conforme necessário -->
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('exam.releaze', id=exam.id) }}" class="btn btn-success">Realizar Prova</a>
+                    <a href="{{ url_for('exam.edit', id=exam.id) }}" class="btn btn-info">Editar Prova</a>
+                    <a href="{{ url_for('panel.index', id=exam.id) }}" class="btn btn-info">Incluir Questão</a>
+                    <a href="{{ url_for('panel.index', id=exam.id) }}" class="btn btn-info">Incluir Questões</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2 class="text-center">Questões</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Questão 1</h5>
+                    <p class="card-text">Enunciado da questão 1...</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Questão 2</h5>
+                    <p class="card-text">Enunciado da questão 2...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+         -->
+</div>
+
+{% endblock %}
+
+
+
+

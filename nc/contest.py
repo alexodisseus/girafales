@@ -60,6 +60,7 @@ def view_contest(id):
 	return render_template('contest/view_contest.html', contest=contest , exams=exams)
 
 
+
 @contest.route('/exame_view/<id>', methods=['GET'])
 def view_exam(id):
     
