@@ -38,18 +38,6 @@ def view(id):
 	
 	return render_template('question/view.html' , question=question)
 	
-@question.route('/realizar_questione/<id>', methods = ['GET','POST'])
-def releaze(id):
-	"""
-	if 'username' not in session:
-		return redirect(url_for('admin.login'))
-
-	"""
-
-	#data = model.read_tasks(session['userid'])
-	question = model.get_question_by_id(id)
-
-	return render_template('question/releaze.html' , question=question)
 
 @question.route('/editar/<id>', methods=['GET'])
 def edit(id):
@@ -59,11 +47,11 @@ def edit(id):
 	return render_template('question/edit.html' , questions=questions)
 
 
-
 @question.route('/criar/<id>', methods=['GET' , 'POST'])
 def create(id):
     
-	contest = model.get_id_contest(id)
+	exam = model.get_id_exam(id)
+
 	if request.method == 'POST':
 		name = request.form['name']
 		year = request.form['year']
@@ -71,12 +59,12 @@ def create(id):
 		types = request.form['types']
 		contest_id = contest.id
 
-		data = model.create_question(contest_id, name, year, description, types)
+		#data = model.create_exam(contest_id, name, year, description, types)
 		return redirect(url_for('contest.view_contest' , id = contest.id))
 
 
 
-	return render_template('question/create.html', contest = contest)
+	return render_template('question/create.html', exam = exam)
 
 
 def configure(app):

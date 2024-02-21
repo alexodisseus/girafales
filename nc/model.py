@@ -181,6 +181,15 @@ def get_id_contest(id:int):
 		data = session.get(Contest , id)
 		return data
 
+
+
+def get_id_exam(id:int):
+	with Session(engine) as session:
+		data = session.get(Exam , id)
+		return data
+
+
+
 def update_contest(contest_id: int, name: str, types: str) -> Contest:
     with Session(engine) as session:
         contest = session.get(Contest, contest_id)

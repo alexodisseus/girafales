@@ -64,6 +64,7 @@ def edit(id):
 def create(id):
     
 	contest = model.get_id_contest(id)
+	
 	if request.method == 'POST':
 		name = request.form['name']
 		year = request.form['year']

@@ -10,21 +10,42 @@
 {% endblock %}
 {% block content %}
 
-
-<div class="container mt-5">
-  <h2>Cadastro de Questões de Concurso</h2>
+<div class="container mt-5 ">
+    <div class="d-flex align-items-center">
+                    <h2>{{exam.name}}</h2>
+                    <a href="{{url_for('exam.edit',id = exam.id)}}">
+                        
+                        <button  class="btn btn-link ml-3">Editar</button>
+                    </a>
+                </div>
+  <h2>Cadastro de Questões 1 - 1</h2>
   <form>
     <div class="form-group">
-      <label for="concurso">Concurso:</label>
-      <input type="text" class="form-control" id="concurso" name="concurso">
+        <label for="contest_id">Prova:</label>
+        
+        <select class="form-control" name="contest_id" id="contest_id" disabled>
+            <option value="{{exam.id}}" selected>{{exam.name}}</option>
+        </select>
+
     </div>
     
-    <div class="form-group">
-      <label for="tipo">Tipo:</label>
-      <select class="form-control" id="tipo" name="tipo">
-        <option value="verdadeiro_falso" selected>Verdadeiro ou Falso</option>
-        <option value="alternativa">Alternativa</option>
-      </select>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="tema">Tema:</label>
+        <select class="form-control" id="tema" name="tema">
+          <option value="matematica">Matemática</option>
+          <option value="portugues">Português</option>
+          <option value="conhecimentos_gerais">Conhecimentos Gerais</option>
+          <option value="conhecimentos_especificos">Conhecimentos Específicos</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="tipo">Tipo:</label>
+        <select class="form-control" id="tipo" name="tipo">
+          <option value="verdadeiro_falso" selected>Verdadeiro ou Falso</option>
+          <option value="alternativa">Alternativa</option>
+        </select>
+      </div>
     </div>
     <div class="form-group">
       <label for="questao">Questão:</label>
@@ -50,17 +71,12 @@
         <label for="alternativa_d">Alternativa D:</label>
         <input type="text" class="form-control" id="alternativa_d" name="alternativa_d">
       </div>
+      <div class="form-group">
+        <label for="alternativa_d">Alternativa E:</label>
+        <input type="text" class="form-control" id="alternativa_d" name="alternativa_d">
+      </div>
     </div>
-    <div class="form-group">
-      <label for="tema">Tema:</label>
-      <select class="form-control" id="tema" name="tema">
-        <option value="matematica">Matemática</option>
-        <option value="portugues">Português</option>
-        <option value="conhecimentos_gerais">Conhecimentos Gerais</option>
-        <option value="conhecimentos_especificos">Conhecimentos Específicos</option>
-      </select>
-    </div>
-
+    
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>
