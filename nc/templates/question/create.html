@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+
+<div class="container mt-5">
+  <h2>Cadastro de Questões de Concurso</h2>
+  <form>
+    <div class="form-group">
+      <label for="concurso">Concurso:</label>
+      <input type="text" class="form-control" id="concurso" name="concurso">
+    </div>
+    
+    <div class="form-group">
+      <label for="tipo">Tipo:</label>
+      <select class="form-control" id="tipo" name="tipo">
+        <option value="verdadeiro_falso" selected>Verdadeiro ou Falso</option>
+        <option value="alternativa">Alternativa</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="questao">Questão:</label>
+      <textarea class="form-control" id="questao" name="questao" rows="3"></textarea>
+    </div>
+    
+
+    <!-- Campo para cadastrar alternativas -->
+    <div id="alternativas" style="display: none;">
+      <div class="form-group">
+        <label for="alternativa_a">Alternativa A:</label>
+        <input type="text" class="form-control" id="alternativa_a" name="alternativa_a">
+      </div>
+      <div class="form-group">
+        <label for="alternativa_b">Alternativa B:</label>
+        <input type="text" class="form-control" id="alternativa_b" name="alternativa_b">
+      </div>
+      <div class="form-group">
+        <label for="alternativa_c">Alternativa C:</label>
+        <input type="text" class="form-control" id="alternativa_c" name="alternativa_c">
+      </div>
+      <div class="form-group">
+        <label for="alternativa_d">Alternativa D:</label>
+        <input type="text" class="form-control" id="alternativa_d" name="alternativa_d">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tema">Tema:</label>
+      <select class="form-control" id="tema" name="tema">
+        <option value="matematica">Matemática</option>
+        <option value="portugues">Português</option>
+        <option value="conhecimentos_gerais">Conhecimentos Gerais</option>
+        <option value="conhecimentos_especificos">Conhecimentos Específicos</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</div>
+
+<!-- Adicione o JavaScript do Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#tipo').on('click', function(){
+      if($(this).val() == 'alternativa'){
+        $('#alternativas').show();
+      } else {
+        $('#alternativas').hide();
+      }
+    });
+  });
+</script>
+
+
+
+{% endblock %}

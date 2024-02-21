@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+                 
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    
+    <div class="container">
+        <h1>Concurso</h1>
+        <p><strong>Nome:</strong> {{ contest.name }}</p>
+        <p><strong>Tipo:</strong> {{ contest.types }}</p>
+    </div>
+    <div class="container mt-5">
+    <h2>Lista de Provas</h2>
+    <table class="table table-dark table-striped mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ano</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for Exam in exams %}
+            <tr>
+                <td>{{ Exam.id }}</td>
+                <td>{{ Exam.name }}</td>
+                <td>{{ Exam.year }}</td>
+                <td>{{ Exam.description }}</td>
+                <td>{{ Exam.types }}</td>
+                <td>
+                <!--  
+                <a href="{{ url_for('contest.edit_contest', id=contest.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                -->
+                <a href="{{ url_for('exam.view', id=Exam.id) }}" class="btn btn-sm btn-outline-info">View</a>
+                    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        <a href="{{ url_for('contest.create_exam', id=contest.id) }}" class="btn btn-info">Adicionar</a>
+    
+</div>
+</div>
+
+{% endblock %}
+
+

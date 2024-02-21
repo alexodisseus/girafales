@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet"
+                  href="{{url_for('static', filename='index.css')}}">
+{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rede Social - Perguntas e Categorias</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .question-card {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="my-4">Perguntas</h1>
+        <!-- Card de Pergunta -->
+        <div class="card question-card">
+          <div class="card-body">
+            <h5 class="card-title">Título da Pergunta 1</h5>
+            <p class="card-text">Descrição da pergunta 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <a href="#" class="btn btn-primary">Ver Mais</a>
+          </div>
+        </div>
+        <div class="card question-card">
+          <div class="card-body">
+            <h5 class="card-title">Título da Pergunta 1</h5>
+            <p class="card-text">Descrição da pergunta 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <a href="#" class="btn btn-primary">Ver Mais</a>
+          </div>
+        </div>
+
+        <!-- Adicione mais cards de pergunta conforme necessário -->
+
+      </div>
+
+      <div class="col-md-4">
+        <h1 class="my-4">Categorias</h1>
+        <!-- Lista de Categorias -->
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            Categoria 1
+            <span class="badge badge-primary badge-pill">10</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            Categoria 2
+            <span class="badge badge-primary badge-pill">8</span>
+          </a>
+          <!-- Adicione mais categorias conforme necessário -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+    
+    
+    
+{% endblock %}
+

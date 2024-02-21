@@ -3,6 +3,7 @@ import contest
 import exam
 import model
 import panel
+import question
 
 
 from flask import Flask
@@ -21,6 +22,7 @@ admin.configure(app)
 contest.configure(app)
 exam.configure(app)
 panel.configure(app)
+question.configure(app)
 db.configure(app)
 
 Bootstrap4(app)
