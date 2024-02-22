@@ -108,7 +108,7 @@ class Exam(SQLModel, table=True):
 class Question(SQLModel, table=True):
 	id: Optional[int] = Field(default=None, primary_key=True)
 	text: str
-	answer: str
+	associate: Optional[int] 
 	types:str
 	tag: Optional[str]
 
@@ -137,6 +137,39 @@ def create_questions_from_dict(questions_dict: dict) -> List[Question]:
     		questions.append(question)
     return questions
 
+
+
+
+
+def create_question_id(exame_id, tag:str, types:str, text:str , alt_a = None, alt_b = None, alt_c= None, alt_d = None, alt_e = None):
+	#exam_id = 
+	question = Question(text = text, tag = tag , types = types , associate = None)
+	with Session(engine) as session:
+		session.add(question)
+		session.commit()
+		session.refresh(question)
+		if alt_a:
+			data = Question(text = alt_a, tag = tag , types = types , associate =question.id)
+			session.add(data)
+			session.commit()
+		if alt_b:
+			data = Question(text = alt_b, tag = tag , types = types , associate =question.id)
+			session.add(data)
+			session.commit()
+		if alt_c:
+			data = Question(text = alt_c, tag = tag , types = types , associate =question.id)
+			session.add(data)
+			session.commit()
+		if alt_d:
+			data = Question(text = alt_d, tag = tag , types = types , associate =question.id)
+			session.add(data)
+			session.commit()
+		if alt_e:
+			data = Question(text = alt_e, tag = tag , types = types , associate =question.id)
+			session.add(data)
+			session.commit()
+
+	return True
 
 
 def get_all_questions() -> List[Question]:
