@@ -7,6 +7,8 @@ from sqlalchemy import func
 
 
 
+
+
 db = SQLModel()
 
 def configure(app):
@@ -101,7 +103,7 @@ class Exam(SQLModel, table=True):
 	description: str
 	types:str #para indicar se é a prova do concurso ou uma prova montada
 	contest_id: int = Field(foreign_key='contest.id')
-
+	questions:List['Question_exam']=Relationship()
 
 
 
@@ -111,7 +113,7 @@ class Question(SQLModel, table=True):
 	associate: Optional[int] 
 	types:str
 	tag: Optional[str]
-	exams:List['Alternative']=Relationship()
+	alternatives:List['Alternative']=Relationship()
 
 
 class Question_exam(SQLModel, table=True):
@@ -186,16 +188,13 @@ def create_question_id(exame_id, tag:str, types:str, text:str , alt_a = None, al
 
 def get_questions_by_id_exam(id):
 	with Session(engine) as session:
+		query = select(Question).join(Question_exam)
+		query = query.where( Question_exam.exam_id == id )
 
-		query = select(Alternative , Question).join(Question_exam).join(Alternative)
-		query = query.where(Question_exam.exam_id ==  id)
-		
-		print(query)
 		data = session.exec(query).all()
-		
-		return data
 
-
+		questions =[[x for x in data], [x.alternatives for x in data] ]
+		return questions
 
 def get_all_questions() -> List[Question]:
     with Session(engine) as session:
