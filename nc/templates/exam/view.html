@@ -9,7 +9,7 @@
                  
 {% endblock %}
 {% block content %}
-
+{{questions}}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -36,29 +36,87 @@
             </div>
         </div>
     </div>
-    <!--
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <h2 class="text-center">Questões</h2>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Questão 1</h5>
-                    <p class="card-text">Enunciado da questão 1...</p>
-                </div>
+
+
+</div><!--end div conteiner-->
+  <div class="container">
+    <h1>Questões</h1>
+    
+    <!-- Abas de Categorias -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="portugues-tab" data-toggle="tab" href="#portugues" role="tab" aria-controls="portugues" aria-selected="true">Português</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="matematica-tab" data-toggle="tab" href="#matematica" role="tab" aria-controls="matematica" aria-selected="false">Matemática</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="gerais-tab" data-toggle="tab" href="#gerais" role="tab" aria-controls="gerais" aria-selected="false">Conhecimentos Gerais</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="especificos-tab" data-toggle="tab" href="#especificos" role="tab" aria-controls="especificos" aria-selected="false">Conhecimentos Específicos</a>
+      </li>
+    </ul>
+    
+    <!-- Conteúdo das Abas -->
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="portugues" role="tabpanel" aria-labelledby="portugues-tab">
+        <!-- Questões de Português -->
+        <div class="category">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Questão 1:</h5>
+              <p class="card-text">Qual é o nome do processo de formação de palavras que envolve a junção de dois ou mais radicais?</p>
+              <p class="card-text"><strong>Resposta:</strong> Derivação</p>
             </div>
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h5 class="card-title">Questão 2</h5>
-                    <p class="card-text">Enunciado da questão 2...</p>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+      
+      <div class="tab-pane fade" id="matematica" role="tabpanel" aria-labelledby="matematica-tab">
+        <!-- Questões de Matemática -->
+        <div class="category">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Questão 1:</h5>
+              <p class="card-text">Qual é o resultado da operação: 4 * (6 + 2) - 10?</p>
+              <p class="card-text"><strong>Resposta:</strong> 22</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tab-pane fade" id="gerais" role="tabpanel" aria-labelledby="gerais-tab">
+        <!-- Questões de Conhecimentos Gerais -->
+        <div class="category">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Questão 1:</h5>
+              <p class="card-text">Qual é a capital do Japão?</p>
+              <p class="card-text"><strong>Resposta:</strong> Tóquio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tab-pane fade" id="especificos" role="tabpanel" aria-labelledby="especificos-tab">
+        <!-- Questões de Conhecimentos Específicos -->
+        <div class="category">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Questão 1:</h5>
+              <p class="card-text">Qual é o principal ácido presente no limão?</p>
+              <p class="card-text"><strong>Resposta:</strong> Ácido cítrico</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-         -->
-</div>
+  </div>
+  
+
+
 
 {% endblock %}
-
-
 
 

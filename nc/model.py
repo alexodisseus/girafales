@@ -111,14 +111,21 @@ class Question(SQLModel, table=True):
 	associate: Optional[int] 
 	types:str
 	tag: Optional[str]
+	exams:List['Alternative']=Relationship()
 
 
 class Question_exam(SQLModel, table=True):
 	id: Optional[int] = Field(default=None, primary_key=True)
 	exam_id: int = Field(foreign_key='exam.id')
 	question_id: int = Field(foreign_key='question.id')
-	
 
+
+class Alternative(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    alternative:str
+    text:str
+    question_id: int = Field(foreign_key='question.id')
+    
 
 engine = create_engine('sqlite:///db.db')
 
@@ -149,27 +156,45 @@ def create_question_id(exame_id, tag:str, types:str, text:str , alt_a = None, al
 		session.commit()
 		session.refresh(question)
 		if alt_a:
-			data = Question(text = alt_a, tag = tag , types = types , associate =question.id)
+			data = Alternative(text = alt_a, alternative = "a", question_id =question.id)
 			session.add(data)
 			session.commit()
 		if alt_b:
-			data = Question(text = alt_b, tag = tag , types = types , associate =question.id)
+			data = Alternative(text = alt_b, alternative = "b", question_id =question.id)
 			session.add(data)
 			session.commit()
 		if alt_c:
-			data = Question(text = alt_c, tag = tag , types = types , associate =question.id)
+			data = Alternative(text = alt_c, alternative ="c", question_id =question.id)
 			session.add(data)
 			session.commit()
 		if alt_d:
-			data = Question(text = alt_d, tag = tag , types = types , associate =question.id)
+			data = Alternative(text = alt_d, alternative = "d", question_id =question.id)
 			session.add(data)
 			session.commit()
 		if alt_e:
-			data = Question(text = alt_e, tag = tag , types = types , associate =question.id)
+			data = Alternative(text = alt_e, alternative = "e", question_id =question.id)
 			session.add(data)
 			session.commit()
 
+		exame_question = Question_exam(exam_id = exame_id , question_id =question.id )
+		session.add(exame_question)
+		session.commit()
+
 	return True
+
+
+
+def get_questions_by_id_exam(id):
+	with Session(engine) as session:
+
+		query = select(Alternative , Question).join(Question_exam).join(Alternative)
+		query = query.where(Question_exam.exam_id ==  id)
+		
+		print(query)
+		data = session.exec(query).all()
+		
+		return data
+
 
 
 def get_all_questions() -> List[Question]:

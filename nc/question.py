@@ -53,8 +53,8 @@ def create(id):
 	exam = model.get_id_exam(id)
 
 	if request.method == 'POST':
-		#exam_id = request.form['contest_id']
-		exam_id = 4
+		exam_id = request.form['exam_id']
+		
 		tema = request.form['tema']
 		tipo = request.form['tipo']
 		questao = request.form['questao']
@@ -68,7 +68,7 @@ def create(id):
 		
 
 		data = model.create_question_id( exam_id, tema, tipo, questao, alternativa_a , alternativa_b, alternativa_c, alternativa_d, alternativa_e)
-		return redirect(url_for('contest.view_contest' , id = exame_id))
+		return redirect(url_for('exam.view' , id = exam_id))
 
 
 

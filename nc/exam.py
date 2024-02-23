@@ -35,8 +35,8 @@ def view(id):
 
 	#data = model.read_tasks(session['userid'])
 	exam = model.get_exam_by_id(id)
-	
-	return render_template('exam/view.html' , exam=exam)
+	questions = model.get_questions_by_id_exam(id)
+	return render_template('exam/view.html' , exam=exam , questions = questions)
 	
 @exam.route('/realizar_exame/<id>', methods = ['GET','POST'])
 def releaze(id):

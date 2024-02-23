@@ -9,7 +9,7 @@
                  
 {% endblock %}
 {% block content %}
-
+{{exam.id}}
 <div class="container mt-5 ">
     <div class="d-flex align-items-center">
                     <h2>{{exam.name}}</h2>
@@ -23,7 +23,7 @@
     <div class="form-group">
         <label for="contest_id">Prova:</label>
         
-        <select class="form-control" name="contest_id" id="contest_id" disabled>
+        <select class="form-control" name="exam_id" id="exam_id" >
             <option value="{{exam.id}}" selected>{{exam.name}}</option>
         </select>
 
