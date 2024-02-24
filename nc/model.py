@@ -185,7 +185,6 @@ def create_question_id(exame_id, tag:str, types:str, text:str , alt_a = None, al
 	return True
 
 
-
 def get_questions_by_id_exam(id):
 	with Session(engine) as session:
 		query = select(Question).join(Question_exam)
@@ -193,8 +192,12 @@ def get_questions_by_id_exam(id):
 
 		data = session.exec(query).all()
 
-		questions =[[x for x in data], [x.alternatives for x in data] ]
-		return questions
+		questions =[x.alternatives for x in data ]
+		return questions , data
+
+
+
+
 
 def get_all_questions() -> List[Question]:
     with Session(engine) as session:

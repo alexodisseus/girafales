@@ -11,14 +11,17 @@
 {% block content %}
 {{exam.id}}
 <div class="container mt-5 ">
-    <div class="d-flex align-items-center">
-                    <h2>{{exam.name}}</h2>
-                    <a href="{{url_for('exam.edit',id = exam.id)}}">
-                        
-                        <button  class="btn btn-link ml-3">Editar</button>
-                    </a>
-                </div>
-  <h2>Cadastro de Questões 1 - 1</h2>
+  <div class="row align-items-center">
+    <div class="col">
+      <h2>Cadastro de Questões 1 - 1 - {{exam.name}}</h2>
+    </div>
+    <div class="col-auto">
+    <a href="{{ url_for('panel.index', id=exam.id) }}" class="btn btn-info">Cadastrar multiplas</a>
+    </div>
+  </div>
+  <div>
+    
+  </div>
   <form method="POST">
     <div class="form-group">
         <label for="contest_id">Prova:</label>
@@ -37,6 +40,8 @@
           <option value="portugues">Português</option>
           <option value="conhecimentos_gerais">Conhecimentos Gerais</option>
           <option value="conhecimentos_especificos">Conhecimentos Específicos</option>
+          <option value="texto">Texto interpretação</option>
+          
         </select>
       </div>
       <div class="form-group col-md-6">
@@ -44,6 +49,7 @@
         <select class="form-control" id="tipo" name="tipo">
           <option value="verdadeiro_falso" selected>Verdadeiro ou Falso</option>
           <option value="alternativa">Alternativa</option>
+          <option value="texto">Texto Interpretação</option>
         </select>
       </div>
     </div>
