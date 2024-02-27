@@ -195,6 +195,15 @@ def get_questions_by_id_exam(id):
 		questions =[x.alternatives for x in data ]
 		return questions , data
 
+def get_questions_view(id):
+	with Session(engine) as session:
+		query = select(Question).join(Question_exam)
+		query = query.where( Question_exam.exam_id == id )
+
+		data = session.exec(query).all()
+
+		return data
+
 
 
 
