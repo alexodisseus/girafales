@@ -74,6 +74,7 @@
                 
                     {%if x.tag == 'portugues':%}
                         <div class="card">
+                            <a href="{{ url_for('question.view', question_id=x.id, exam_id=exam.id  ) }}" class="btn btn-primary">Próxima</a>
                             <div class="card-body">
                                 <h5 class="card-title">Questão {{x.id}}:</h5>
                                 <p class="card-text"> {{x.text}}</p>

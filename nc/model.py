@@ -153,7 +153,8 @@ def read_user(email , password):
 def get_question_realize(user_id , exam_id):
 	with Session(engine) as session:
 
-		query = select(Question)
+		query = select(Question).join(Question_exam)
+		query = query.where( Question_exam.exam_id == exam_id )
 		#continue
 		data = session.exec(query).first()
 
@@ -162,20 +163,22 @@ def get_question_realize(user_id , exam_id):
 
 		return question,question.alternatives
 
-
-def get_question_realize_next(user_id , question_id):
+"""
+def get_question_realize_next(user_id , question_id , exam_id):
 	with Session(engine) as session:
 
-		query = select(Question).where(Question.id > question_id)
+		query = select(Question).join(Question_exam)
+		query = query.where( Question_exam.exam_id == exam_id ,Question.id != question_id )
 		
 		data = session.exec(query).first()
+		print(data)
 
 
 		question = session.get(Question, data.id)
 
 		return question,question.alternatives
 
-
+"""
 
 
 def create_questions_from_dict(questions_dict: dict) -> List[Question]:

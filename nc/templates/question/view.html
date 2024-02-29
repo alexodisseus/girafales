@@ -10,55 +10,45 @@
 {% endblock %}
 {% block content %}
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mt-4 offset-md-3">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
                     {{exam.name}}
                 </div>
-                <div class="card-body">
-                    <div class="btn-group-vertical w-100">
-                        <button type="button" class="btn btn-light">Número 
-                        de Questões: {{exam.count}}</button>
-                        <button type="button" class="btn btn-light">Tipo de Prova: {{exam.types}}</button>
-                        <button type="button" class="btn btn-light">{{exam.description}}</button>
-                        <!-- Adicione mais botões conforme necessário -->
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <a href="{{ url_for('exam.releaze', id=exam.id) }}" class="btn btn-success">Realizar Prova</a>
-                    <a href="{{ url_for('exam.edit', id=exam.id) }}" class="btn btn-info">Editar Prova</a>
-                    <a href="{{ url_for('exam.create', id=exam.id) }}" class="btn btn-info">Incluir Questão</a>
-                    <a href="{{ url_for('panel.index', id=exam.id) }}" class="btn btn-info">Incluir Questões</a>
-                    
-                </div>
+        <div class="card-body">
+          
+          {%if questao:%}
+            <h5 class="card-title">Questão {{questao[0].id}}:</h5>
+            <p class="card-text">{{questao[0].text}}</p>
+            {%for x in questao[1]:%}  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="alternativa" id="alternativa1" value="option1">
+              <label class="form-check-label" for="alternativa1">
+                 {{x.alternative}} ) {{x.text}}
+              </label>
             </div>
+            {%endfor%}
+          {%endif%}
         </div>
-    </div>
-    <!--
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <h2 class="text-center">Questões</h2>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Questão 1</h5>
-                    <p class="card-text">Enunciado da questão 1...</p>
-                </div>
-            </div>
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h5 class="card-title">Questão 2</h5>
-                    <p class="card-text">Enunciado da questão 2...</p>
-                </div>
-            </div>
+      </div>
+
+      <div class="justify-content-center mt-4" >
+        <div class="justify-content-center row">
+            
+        <button type="button" class="btn btn-primary">Ver Resposta</button>
+        <button type="button" class="btn btn-danger">Sair</button>
+        
+
         </div>
+      </div>
     </div>
-         -->
+  </div>
 </div>
 
+
+
 {% endblock %}
-
-
 
 

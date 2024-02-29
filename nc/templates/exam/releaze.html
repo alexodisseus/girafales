@@ -40,7 +40,7 @@
         <button type="button" class="btn btn-primary">Anterior</button>
         <button type="button" class="btn btn-danger">Sair</button>
         
-        <a href="{{ url_for('exam.next', id=questao[0].id) }}" class="btn btn-primary">Próxima</a>
+        <a href="{{ url_for('exam.next', question_id=questao[0].id, exam_id=exam.id  ) }}" class="btn btn-primary">Próxima</a>
 
         </div>
       </div>

@@ -25,8 +25,8 @@ def index():
 	return render_template('question/index.html' , contests = data )
 
 
-@question.route('/ver/<id>', methods = ['GET','POST'])
-def view(id):
+@question.route('/ver/<question_id>/<exam_id>', methods = ['GET','POST'])
+def view(question_id, exam_id):
 	"""
 	if 'username' not in session:
 		return redirect(url_for('admin.login'))
@@ -34,6 +34,7 @@ def view(id):
 	"""
 
 	#data = model.read_tasks(session['userid'])
+	
 	question = model.get_question_by_id(id)
 	
 	return render_template('question/view.html' , question=question)
