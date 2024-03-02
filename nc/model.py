@@ -436,6 +436,13 @@ def get_exam_by_id(id):
 		
 		return data
 
+def get_response_by_question(id):
+	with Session(engine) as session:
+		#question =session.get( Question_exam)  
+		data = session.get(Exam, id)
+		
+		return data
+
 
 def get_all_questions_null(id):
 	with Session(engine) as session:

@@ -39,6 +39,22 @@ def view(question_id, exam_id):
 	return render_template('question/view.html' , exam=exam , questao=questao)
 	
 
+@question.route('/resposta/<question_id>/<exam_id>', methods = ['GET','POST'])
+def response(question_id, exam_id):
+	
+	if 'username' not in session:
+		return redirect(url_for('admin.login'))
+	
+	user = session['userid']
+
+	exam = model.get_exam_by_id(exam_id)
+	questao = model.get_question_realize(user, exam.id , question_id)
+	response = model.get_response_by_question(question_id)
+
+	return render_template('question/response.html' , exam=exam , questao=questao , response = response)
+
+
+
 @question.route('/editar/<id>', methods=['GET'])
 def edit(id):
     

@@ -17,7 +17,6 @@
         <div class="card-header bg-primary text-white">
                     {{exam.name}}
                 </div>
-        <form action="{{url_for('question.response', exam_id = exam.id , question_id = questao[0].id)}}">
           
         <div class="card-body">
           
@@ -39,14 +38,18 @@
       <div class="justify-content-center mt-4" >
         <div class="justify-content-center row">
             
-        <button type="submit" class="btn btn-primary">Ver Resposta</button>
-        </form>
+        <a href="{{url_for('exam.view' , id = exam.id)}}" class="btn btn-primary">Ver Resposta</a>
+        
         
 
         </div>
       </div>
     </div>
   </div>
+</div>
+<div>
+  
+  ssdknlskndv
 </div>
 
 
