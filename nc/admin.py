@@ -18,7 +18,7 @@ def index():
 	"""
 
 	#data = model.read_tasks(session['userid'])
-	
+
 	return render_template('index.html' )
 	#return render_template('login.html' )
 

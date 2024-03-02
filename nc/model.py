@@ -7,8 +7,6 @@ from sqlalchemy import func
 
 
 
-
-
 db = SQLModel()
 
 def configure(app):
@@ -71,18 +69,6 @@ class User(SQLModel, table=True):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 class Contest(SQLModel, table=True):
 	id: Optional[int] = Field(default=None, primary_key=True)
 	name: str
@@ -109,6 +95,7 @@ class Question(SQLModel, table=True):
 	types:str
 	tag: Optional[str]
 	alternatives:List['Alternative']=Relationship()
+	responses:List['Response']=Relationship()
 
 
 class Question_exam(SQLModel, table=True):
@@ -125,15 +112,17 @@ class Alternative(SQLModel, table=True):
     
 
 
-class Attempt(SQLModel, table=True):
+class Response(SQLModel, table=True):
 
 	id: Optional[int] = Field(default=None, primary_key=True)
 	user_id: int = Field(foreign_key='user.id')
 	exam_id: int = Field(foreign_key='exam.id')
 	question_id: int = Field(foreign_key='question.id')
 	answer:str
-	number: str
-	#exams:List['Exam']=Relationship()
+	post:str  
+	link:str
+	title:str
+
 
 
 
@@ -438,10 +427,29 @@ def get_exam_by_id(id):
 
 def get_response_by_question(id):
 	with Session(engine) as session:
-		#question =session.get( Question_exam)  
-		data = session.get(Exam, id)
+
+		question =  session.get(Question , id)
+		response = question.responses   
 		
-		return data
+		
+		return response
+
+
+def create_response(user_id: int, exam_id:int , question_id:int , answer:str , post:str , link:str, title:str ):
+	with Session(engine) as session:
+		response = Response(
+			user_id = user_id , 
+			exam_id =exam_id , 
+			question_id = question_id , 
+			answer = answer , 
+			post = post,
+			link = link , 
+			title = title)
+
+		session.add(response)
+		session.commit()
+		return True
+	
 
 
 def get_all_questions_null(id):

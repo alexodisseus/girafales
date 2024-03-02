@@ -15,8 +15,8 @@
     <div class="col-md-6 mt-4 offset-md-3">
       <div class="card">
         <div class="card-header bg-primary text-white">
-                    {{exam.name}}
-                </div>
+          {{exam.name}}
+        </div>
           
         <div class="card-body">
           
@@ -24,34 +24,54 @@
             <h5 class="card-title">Questão {{questao[0].id}}:</h5>
             <p class="card-text">{{questao[0].text}}</p>
             {%for x in questao[1]:%}  
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="alternativa" id="alternativa1" value="option1">
-              <label class="form-check-label" for="alternativa1">
-                 {{x.alternative}} ) {{x.text}}
-              </label>
-            </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="alternativa" id="alternativa1" value="option1">
+                <label class="form-check-label" for="alternativa1">
+                  {{x.alternative}} ) {{x.text}}
+                </label>
+              </div>
             {%endfor%}
           {%endif%}
         </div>
       </div>
-
-      <div class="justify-content-center mt-4" >
-        <div class="justify-content-center row">
-            
-        <a href="{{url_for('exam.view' , id = exam.id)}}" class="btn btn-primary">Ver Resposta</a>
-        
-        
-
-        </div>
-      </div>
+      
     </div>
   </div>
 </div>
-<div>
-  
-  ssdknlskndv
-</div>
+<div class="container mt-5">
+  <h2>Cadastrar Resposta</h2>
+  {{questao[0].id}}
+  {{exam.id}}
+  {{responses}}
 
+  <form action="{{url_for('question.response', exam_id = exam.id , question_id = questao[0].id )}}" method="POST">
+    <div class="form-group">
+      <label for="conteudo">Fonte:</label>
+      <input type="text" class="form-control"  name="titulo" id="titulo" placeholder="Site da pesquisa">
+    </div>
+    <div class="form-group">
+      <label for="conteudo">Explicação:</label>
+      <textarea class="form-control" id="explicacao" name="explicacao" rows="3" placeholder="Explique sua resposta, cole a resposta do link, brilhe.."></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="link">Link para resposta:</label>
+        <input type="text" class="form-control" id="link" name="link" placeholder="Insira o link">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="resposta">Resposta da Correta:</label>
+        <select name="resposta" class="form-control" id="resposta">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Gravar</button>
+  </form>
+</div>
 
 
 {% endblock %}

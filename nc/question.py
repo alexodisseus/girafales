@@ -45,13 +45,26 @@ def response(question_id, exam_id):
 	if 'username' not in session:
 		return redirect(url_for('admin.login'))
 	
+	if request.method == 'POST':
+		titulo = request.form['titulo']
+		explicacao = request.form['explicacao']
+		link = request.form['link']
+		resposta = request.form['resposta']
+
+		
+		
+		
+		asd = model.create_response(session['userid'] , exam_id , question_id,resposta , explicacao , link , titulo)
+		
+
+
 	user = session['userid']
-
 	exam = model.get_exam_by_id(exam_id)
-	questao = model.get_question_realize(user, exam.id , question_id)
-	response = model.get_response_by_question(question_id)
 
-	return render_template('question/response.html' , exam=exam , questao=questao , response = response)
+	questao = model.get_question_realize(user, exam.id , question_id)
+	responses = model.get_response_by_question(question_id)
+
+	return render_template('question/response.html' , exam=exam , questao=questao , responses = responses)
 
 
 
