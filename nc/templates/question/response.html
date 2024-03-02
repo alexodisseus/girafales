@@ -39,10 +39,38 @@
   </div>
 </div>
 <div class="container mt-5">
+  {%if responses:%}
+  {%for x in responses:%}
+
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">Título: {{x.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Pergunta ID: 15</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Resonsta correta: {{x.answer}}</h6>
+          <p class="card-text">Resposta: - 
+            {{x.post}}
+          </p>
+          <a href="{{x.link}}" class="card-link">Link para mais informações</a>
+      </div>
+  </div>
+  {%endfor%}
+  {%endif%}
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5">
   <h2>Cadastrar Resposta</h2>
-  {{questao[0].id}}
-  {{exam.id}}
-  {{responses}}
+  
 
   <form action="{{url_for('question.response', exam_id = exam.id , question_id = questao[0].id )}}" method="POST">
     <div class="form-group">
@@ -72,6 +100,9 @@
     <button type="submit" class="btn btn-primary">Gravar</button>
   </form>
 </div>
+
+
+
 
 
 {% endblock %}
