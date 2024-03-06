@@ -28,6 +28,7 @@ def index():
 def login():
 	if request.method == 'POST':
 
+
 		email = request.form['emai']
 		password = request.form['password']
 		data = model.read_user(email,password)
@@ -37,6 +38,12 @@ def login():
 			session['username'] = data.name
 			session['userid'] = data.id
 			return redirect(url_for('contest.index'))
+		else:
+			data= []
+			data.append(email)
+			data.append(password)
+			return render_template('login.html' , data=data)
+
 
 
 	return render_template('login.html' )
