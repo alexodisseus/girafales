@@ -15,11 +15,21 @@
 <div class="container">
     {{data}}
     {%if data:%}
-    <script type="text/javascript">
-      alert("asd")
+    <script>
+        // Exibir uma caixa de diálogo com a mensagem e botões "Sim" e "Não"
+        var resposta = confirm("o email {{data[0]}}, não está cadastrado, deseja cadastrar?");
+        
+        // Verificar a resposta do usuário
+        if (resposta == true) {
+            alert("cadastrado com sucesso!");
+            window.location.href = "{{url_for('contest.index' , data= data )}}";
+        } else {
+            alert("Você escolheu Não!");
+        }
     </script>
     {%endif%}
 </div>
+
 
 
 

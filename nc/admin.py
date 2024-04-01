@@ -48,6 +48,12 @@ def login():
 
 	return render_template('login.html' )
 
+	
+@admin.route('/logout', methods = ['GET','POST'])
+def logout():
+
+	session.pop('username', None)
+	return redirect(url_for('admin.login'))
 
 def configure(app):
 	app.register_blueprint(admin)
